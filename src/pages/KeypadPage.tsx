@@ -18,14 +18,18 @@ const KeypadPage = () => {
   const [showReaderConnected, setShowReaderConnected] = useState(false);
   const [showRegistrationDialog, setShowRegistrationDialog] = useState(false);
   const [hasShownReaderNotification, setHasShownReaderNotification] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
   
   useEffect(() => {
     if (activeReader && !hasShownReaderNotification) {
       setShowReaderConnected(true);
+      setPopupVisible(true);
       setHasShownReaderNotification(true);
+      
       const timer = setTimeout(() => {
         setShowReaderConnected(false);
-      }, 1000); // Changed from 3000 to 1000 (1 second)
+        setPopupVisible(false);
+      }, 1000);
       
       return () => clearTimeout(timer);
     }
@@ -35,6 +39,7 @@ const KeypadPage = () => {
   useEffect(() => {
     if (!activeReader) {
       setHasShownReaderNotification(false);
+      setPopupVisible(false);
     }
   }, [activeReader]);
   
@@ -91,9 +96,12 @@ const KeypadPage = () => {
             </div>
           )}
           
-          {showReaderConnected && (
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="bg-blue-50 rounded-lg shadow-lg p-4 flex items-center border border-blue-200">
+          {showReaderConnected && popupVisible && (
+            <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+              <div className={cn(
+                "bg-blue-50 rounded-lg shadow-lg p-4 flex items-center border border-blue-200 transition-opacity duration-300",
+                showReaderConnected ? "opacity-100 animate-fade-in" : "opacity-0 animate-fade-out"
+              )}>
                 <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                   <CreditCard className="h-5 w-5 text-blue-700" />
                 </div>
@@ -144,7 +152,7 @@ const KeypadPage = () => {
             <Button 
               onClick={handleCharge} 
               disabled={!isValidAmount}
-              className="w-full h-14 text-lg relative overflow-hidden group text-white bg-blue-500 hover:bg-blue-600 rounded-full"
+              className="w-full h-14 text-lg relative overflow-hidden group text-white bg-green-500 hover:bg-green-600 rounded-full"
             >
               <span className="absolute inset-0 flex items-center justify-center group-hover:translate-y-10 transition-transform duration-200">
                 Charge ₦{formatAmount(totalAmount.toString())}

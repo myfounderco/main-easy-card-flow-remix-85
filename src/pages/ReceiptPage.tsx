@@ -100,7 +100,7 @@ const ReceiptPage = () => {
           
           <div className="w-full mb-4">
             <Button 
-              className="w-full bg-green-500 hover:bg-green-600 text-white py-3 h-14 text-lg"
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-3 h-14 text-lg rounded-lg"
               onClick={handleNewSale}
             >
               <Plus className="h-5 w-5 mr-2" /> New Sale

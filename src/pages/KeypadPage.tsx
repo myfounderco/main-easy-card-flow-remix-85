@@ -25,7 +25,7 @@ const KeypadPage = () => {
       setHasShownReaderNotification(true);
       const timer = setTimeout(() => {
         setShowReaderConnected(false);
-      }, 3000);
+      }, 1000); // Changed from 3000 to 1000 (1 second)
       
       return () => clearTimeout(timer);
     }
@@ -92,7 +92,7 @@ const KeypadPage = () => {
           )}
           
           {showReaderConnected && (
-            <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/20">
+            <div className="fixed inset-0 flex items-center justify-center z-50">
               <div className="bg-blue-50 rounded-lg shadow-lg p-4 flex items-center border border-blue-200">
                 <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                   <CreditCard className="h-5 w-5 text-blue-700" />

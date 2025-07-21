@@ -54,7 +54,7 @@ const ReceiptPage = () => {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <div className="p-4 border-b border-border">
-          <Button variant="ghost" size="icon" onClick={handleGoBack}>
+          <Button variant="ghost" size="icon" onClick={handleGoBack} className="rounded-full">
             <ArrowLeft className="h-5 w-5" />
           </Button>
         </div>
@@ -63,7 +63,7 @@ const ReceiptPage = () => {
           <div className="text-center">
             <h2 className="text-xl font-medium mb-2">Receipt Not Found</h2>
             <p className="text-muted-foreground mb-4">The receipt you're looking for doesn't exist.</p>
-            <Button onClick={handleGoBack}>Go Back</Button>
+            <Button onClick={handleGoBack} className="rounded-full">Go Back</Button>
           </div>
         </div>
       </div>
@@ -73,7 +73,7 @@ const ReceiptPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <div className="p-4 border-b border-border">
-        <Button variant="ghost" size="icon" onClick={handleGoBack}>
+        <Button variant="ghost" size="icon" onClick={handleGoBack} className="rounded-full">
           <ArrowLeft className="h-5 w-5" />
         </Button>
         
@@ -93,8 +93,9 @@ const ReceiptPage = () => {
             </p>
           </div>
 
-          <div className="text-center text-muted-foreground text-sm mb-3">
-            Receipt has been sent to card holder's linked phone number and email (scroll down for more details)
+          <div className="text-center text-sm mb-3">
+            <span className="text-blue-600">Receipt has been sent to card holder's linked phone number and email</span>
+            <span className="text-muted-foreground"> (scroll down for more details)</span>
           </div>
           
           <div className="w-full mb-4">
@@ -112,7 +113,7 @@ const ReceiptPage = () => {
             <Button 
               onClick={handlePrint}
               variant="outline"
-              className="flex items-center gap-1.5 text-green-600 border-green-200 bg-green-50 hover:bg-green-100"
+              className="flex items-center gap-1.5 text-green-600 border-green-200 bg-green-50 hover:bg-green-100 rounded-full"
               size="sm"
             >
               <Printer className="h-4 w-4" />
@@ -121,7 +122,7 @@ const ReceiptPage = () => {
             <Button 
               onClick={handleShare}
               variant="outline"
-              className="flex items-center gap-1.5 text-blue-600 border-blue-200 bg-blue-50 hover:bg-blue-100"
+              className="flex items-center gap-1.5 text-blue-600 border-blue-200 bg-blue-50 hover:bg-blue-100 rounded-full"
               size="sm"
             >
               <Share className="h-4 w-4" />
@@ -129,7 +130,7 @@ const ReceiptPage = () => {
             </Button>
             <Button 
               variant="outline"
-              className="flex items-center gap-1.5 text-red-600 border-red-200 bg-red-50 hover:bg-red-100"
+              className="flex items-center gap-1.5 text-red-600 border-red-200 bg-red-50 hover:bg-red-100 rounded-full"
               onClick={handleReportTransaction}
               size="sm"
             >

@@ -41,7 +41,7 @@ const OverviewPage = () => {
       <div className="flex-1 p-4 space-y-6">
         {currentScreen === 'pricing' ? (
           <div className="space-y-4">
-            <h2 className="text-xl font-medium text-gray-500">Our Offering</h2>
+            <h2 className="text-xl font-medium text-blue-600">Our Offering</h2>
             
             <Card className="overflow-hidden">
               <div className="bg-blue-500 text-white p-4">
@@ -143,7 +143,7 @@ const OverviewPage = () => {
             <div className="flex justify-end mt-6">
               <Button 
                 onClick={handleNext}
-                className="flex items-center h-14 w-40 bg-blue-500 hover:bg-blue-600"
+                className="flex items-center h-14 w-40 bg-blue-500 hover:bg-blue-600 rounded-full"
               >
                 Next
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -152,7 +152,7 @@ const OverviewPage = () => {
           </div>
         ) : (
           <div className="space-y-4">
-            <h2 className="text-xl font-medium text-gray-500">The Right Partner for Your Business</h2>
+            <h2 className="text-xl font-medium text-blue-600">The Right Partner for Your Business</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card>
@@ -201,7 +201,7 @@ const OverviewPage = () => {
             <div className="pt-6">
               <Button 
                 onClick={handleStartSelling} 
-                className="w-full h-14 text-lg bg-blue-500 hover:bg-blue-600"
+                className="w-full h-14 text-lg bg-blue-500 hover:bg-blue-600 rounded-full"
               >
                 Start Selling
               </Button>

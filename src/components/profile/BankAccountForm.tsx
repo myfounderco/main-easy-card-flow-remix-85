@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { useDevice } from "@/contexts/DeviceContext";
 
 const BANK_OPTIONS = [
   { value: "access", label: "Access Bank" },
@@ -34,6 +35,7 @@ export const BankAccountForm: React.FC<BankAccountFormProps> = ({
   onSuccess,
   onCancel,
 }) => {
+  const { addBankAccount } = useDevice();
   const [loading, setLoading] = useState(false);
   const [bvn, setBvn] = useState("");
   const [bankName, setBankName] = useState("");
@@ -53,6 +55,18 @@ export const BankAccountForm: React.FC<BankAccountFormProps> = ({
 
     // Simulate API call for name resolution
     setTimeout(() => {
+      const selectedBank = BANK_OPTIONS.find(bank => bank.value === bankName);
+      const resolvedAccountName = accountName || "John Doe (Demo)";
+      
+      // Add the bank account using the context
+      addBankAccount({
+        bankName: selectedBank?.label || bankName,
+        accountNumber,
+        accountName: resolvedAccountName,
+        bvn,
+        isDefault: false
+      });
+      
       setLoading(false);
       onSuccess();
       toast.success("Bank account added successfully");
@@ -113,10 +127,10 @@ export const BankAccountForm: React.FC<BankAccountFormProps> = ({
         )}
 
         <div className="flex justify-end space-x-3 pt-4">
-          <Button type="button" variant="outline" onClick={onCancel}>
+          <Button type="button" variant="outline" onClick={onCancel} className="rounded-full">
             Cancel
           </Button>
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={loading} className="rounded-full">
             {loading ? "Adding..." : "Add Account"}
           </Button>
         </div>

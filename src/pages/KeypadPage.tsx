@@ -17,21 +17,40 @@ const KeypadPage = () => {
   const navigate = useNavigate();
   const [showReaderConnected, setShowReaderConnected] = useState(false);
   const [showRegistrationDialog, setShowRegistrationDialog] = useState(false);
+  const [hasShownReaderNotification, setHasShownReaderNotification] = useState(false);
   
   useEffect(() => {
-    if (activeReader) {
+    if (activeReader && !hasShownReaderNotification) {
       setShowReaderConnected(true);
+      setHasShownReaderNotification(true);
       const timer = setTimeout(() => {
         setShowReaderConnected(false);
       }, 3000);
       
       return () => clearTimeout(timer);
     }
+  }, [activeReader, hasShownReaderNotification]);
+  
+  // Reset the notification flag when reader is disconnected
+  useEffect(() => {
+    if (!activeReader) {
+      setHasShownReaderNotification(false);
+    }
   }, [activeReader]);
   
   const numericAmount = parseFloat(amount) || 0;
   const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
   const isValidAmount = totalAmount > 0;
+  
+  // Calculate transaction fee
+  const calculateFee = (amount: number) => {
+    if (amount <= 0) return 0;
+    if (amount < 500) return 5; // Flat fee for small transactions
+    const percentageFee = amount * 0.015; // 1.5%
+    return Math.min(percentageFee, 2500); // Cap at ₦2,500
+  };
+  
+  const transactionFee = calculateFee(totalAmount);
   
   const handleCharge = () => {
     if (!isValidAmount) {
@@ -107,6 +126,13 @@ const KeypadPage = () => {
               Total: ₦{formatAmount(totalAmount.toString())}
             </div>
           )}
+          
+          {/* Transaction Fee Display */}
+          {isValidAmount && (
+            <div className="mt-2 text-sm text-blue-600">
+              Transaction fee: ₦{transactionFee.toFixed(2)}
+            </div>
+          )}
         </div>
         
         <div className="w-full max-w-md mx-auto mb-6">
@@ -117,7 +143,7 @@ const KeypadPage = () => {
           <Button 
             onClick={handleCharge} 
             disabled={!isValidAmount}
-            className="w-full h-14 text-lg relative overflow-hidden group text-white bg-blue-500 hover:bg-blue-600"
+            className="w-full h-14 text-lg relative overflow-hidden group text-white bg-blue-500 hover:bg-blue-600 rounded-full"
           >
             <span className="absolute inset-0 flex items-center justify-center group-hover:translate-y-10 transition-transform duration-200">
               Charge ₦{formatAmount(totalAmount.toString())}
@@ -168,12 +194,12 @@ const KeypadPage = () => {
             <Button 
               variant="outline" 
               onClick={() => setShowRegistrationDialog(false)}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="bg-green-600 hover:bg-green-700 text-white rounded-full"
             >
               Back To Edit Amount
             </Button>
             <Button 
-              className="bg-blue-500 hover:bg-blue-600"
+              className="bg-blue-500 hover:bg-blue-600 rounded-full"
               onClick={() => {
                 setShowRegistrationDialog(false);
                 navigate("/business-registration-check");
@@ -182,8 +208,8 @@ const KeypadPage = () => {
               Complete Registration
             </Button>
           </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        </Dialog>
+      </div>
       
       <BottomNav />
     </div>

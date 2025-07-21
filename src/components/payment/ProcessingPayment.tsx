@@ -113,7 +113,7 @@ export function ProcessingPayment({ onComplete }: ProcessingPaymentProps) {
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-medium mb-6">Authorize Payment</h2>
             
-            <div className="bg-green-50 text-green-700 p-3 rounded-md mb-4 flex items-center font-bold text-sm justify-center max-w-xs">
+            <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-4 flex items-center font-bold text-sm justify-center max-w-xs">
               <CreditCard className="h-4 w-4 mr-2" />
               <span>Leave card inside reader till the transaction is complete.</span>
             </div>
@@ -125,9 +125,11 @@ export function ProcessingPayment({ onComplete }: ProcessingPaymentProps) {
               {pinDigits.map((digit, index) => (
                 <div
                   key={index}
-                  className="w-12 h-12 rounded-full border-2 border-blue-400 flex items-center justify-center"
+                  className="w-12 h-12 rounded-full border-2 border-green-400 flex items-center justify-center"
                 >
-                  {digit ? "•" : ""}
+                  {digit ? (
+                    <span className="text-green-600">•</span>
+                  ) : ""}
                 </div>
               ))}
             </div>
@@ -136,7 +138,7 @@ export function ProcessingPayment({ onComplete }: ProcessingPaymentProps) {
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
                 <button
                   key={num}
-                  className="w-20 h-20 rounded-md bg-secondary hover:bg-secondary/80 flex items-center justify-center text-xl font-medium transition-colors text-blue-500"
+                  className="w-20 h-20 rounded-md bg-secondary hover:bg-secondary/80 flex items-center justify-center text-xl font-medium transition-colors text-green-600"
                   onClick={() => handlePinDigit(num)}
                 >
                   {num}
@@ -149,7 +151,7 @@ export function ProcessingPayment({ onComplete }: ProcessingPaymentProps) {
                 Delete
               </button>
               <button
-                className="w-20 h-20 rounded-md bg-secondary hover:bg-secondary/80 flex items-center justify-center text-xl font-medium transition-colors text-blue-500"
+                className="w-20 h-20 rounded-md bg-secondary hover:bg-secondary/80 flex items-center justify-center text-xl font-medium transition-colors text-green-600"
                 onClick={() => handlePinDigit(0)}
               >
                 0

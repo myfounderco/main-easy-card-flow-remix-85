@@ -18,10 +18,11 @@ export function ReceiptForm({ transactionId }: ReceiptFormProps) {
     return <div>Transaction not found</div>;
   }
   
-  // Format phone number - replace +234 with 0
+  // Format phone number - replace +234 with 0 and mask all but last 4 digits
   const formatPhoneNumber = (phone: string | undefined) => {
-    if (!phone) return "";
-    return phone.replace(/^\+234/, "0");
+    if (!phone) return "****3344";
+    const cleaned = phone.replace(/^\+234/, "0");
+    return `****${cleaned.slice(-4)}`;
   };
   
   const handleCopyId = () => {
@@ -65,17 +66,17 @@ export function ReceiptForm({ transactionId }: ReceiptFormProps) {
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-500">Cardholder</span>
-            <span>{transaction.customerName || "Not provided"}</span>
+            <span>{transaction.customerName || "John Smith"}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-500">Phone</span>
-            <span>{formatPhoneNumber(transaction.customerPhone) || "Not provided"}</span>
+            <span>{formatPhoneNumber(transaction.customerPhone)}</span>
           </div>
         </div>
         
         <div className="flex justify-between items-center text-lg font-bold py-2">
-          <span>Total Amount</span>
-          <span>₦{transaction.amount.toFixed(2)}</span>
+          <span className="text-blue-600">Total Amount</span>
+          <span className="text-blue-600">₦{transaction.amount.toFixed(2)}</span>
         </div>
         
         <div className="flex justify-between text-sm">

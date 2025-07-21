@@ -74,7 +74,7 @@ const HistoryPage = () => {
           </div>
           <div className="text-right">
             <p className="text-sm text-muted-foreground">Lifetime Sales</p>
-            <p className="text-xl font-semibold">₦{lifetimeSales.toFixed(2)}</p>
+            <p className="text-xl font-semibold text-blue-600">₦{lifetimeSales.toFixed(2)}</p>
           </div>
         </div>
       </div>

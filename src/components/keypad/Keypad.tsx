@@ -115,7 +115,7 @@ export function Keypad({
       
       {/* Row 4 */}
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-red-500 text-xl font-medium transition-all duration-200 active:scale-95"
+        className="py-10 rounded-md flex items-center justify-center text-red-500 text-2xl font-bold transition-all duration-200 active:scale-95"
         onClick={handleDelete}
       >
         {showDeleteLabel ? "Delete" : "C"}
@@ -128,7 +128,7 @@ export function Keypad({
       </button>
       {showAddButton ? (
         <button 
-          className="py-8 rounded-md flex items-center justify-center text-blue-500 text-xl font-medium transition-all duration-200 active:scale-95"
+          className="py-10 rounded-md flex items-center justify-center text-blue-500 text-2xl font-bold transition-all duration-200 active:scale-95"
           onClick={handleAddition}
         >
           +

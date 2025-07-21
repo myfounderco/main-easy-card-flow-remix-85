@@ -62,7 +62,7 @@ const KeypadPage = () => {
         {!activeReader ? (
           <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
             <CreditCard className="h-4 w-4 mr-2" />
-            <span>Connect card reader (POS) into phone charging point.</span>
+            <span>Connect card reader (POS) into phone charging point or via Bluetooth.</span>
           </div>
         ) : (
           <div className="bg-green-50 text-green-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">

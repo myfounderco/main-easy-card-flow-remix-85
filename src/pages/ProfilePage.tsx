@@ -1,7 +1,6 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDevice } from "@/contexts/DeviceContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,7 @@ import { ProfileTabs } from "@/components/profile/ProfileTabs";
 
 const ProfilePage = () => {
   const { readers, bankAccounts, removeBankAccount } = useDevice();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("account");
   const [showBankDialog, setShowBankDialog] = useState(false);
   const [showBusinessDialog, setShowBusinessDialog] = useState(false);
@@ -23,6 +23,13 @@ const ProfilePage = () => {
   const [isBusinessVerified, setIsBusinessVerified] = useState(false);
   
   const navigate = useNavigate();
+
+  // Handle navigation state for setting active tab
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location.state]);
   
   const handleCall = () => {
     toast.info("Calling customer support...");

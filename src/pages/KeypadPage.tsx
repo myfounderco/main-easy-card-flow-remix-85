@@ -15,33 +15,7 @@ const KeypadPage = () => {
   const { amount, formatAmount, runningTotal } = usePayment();
   const { activeReader, hasBusinessRegistration } = useDevice();
   const navigate = useNavigate();
-  const [showReaderConnected, setShowReaderConnected] = useState(false);
   const [showRegistrationDialog, setShowRegistrationDialog] = useState(false);
-  const [hasShownReaderNotification, setHasShownReaderNotification] = useState(false);
-  const [popupVisible, setPopupVisible] = useState(false);
-  
-  useEffect(() => {
-    if (activeReader && !hasShownReaderNotification) {
-      setShowReaderConnected(true);
-      setPopupVisible(true);
-      setHasShownReaderNotification(true);
-      
-      const timer = setTimeout(() => {
-        setShowReaderConnected(false);
-        setPopupVisible(false);
-      }, 1000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [activeReader, hasShownReaderNotification]);
-  
-  // Reset the notification flag when reader is disconnected
-  useEffect(() => {
-    if (!activeReader) {
-      setHasShownReaderNotification(false);
-      setPopupVisible(false);
-    }
-  }, [activeReader]);
   
   const numericAmount = parseFloat(amount) || 0;
   const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
@@ -79,6 +53,10 @@ const KeypadPage = () => {
     
     navigate("/process-payment");
   };
+
+  const handleLinkReader = () => {
+    navigate("/profile", { state: { activeTab: "devices" } });
+  };
   
   return (
     <>
@@ -87,7 +65,15 @@ const KeypadPage = () => {
           {!activeReader ? (
             <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
               <CreditCard className="h-4 w-4 mr-2" />
-              <span>Connect card reader (POS) into phone charging point or via Bluetooth.</span>
+              <span>
+                Connect card reader (POS) into phone charging point or via Bluetooth.{" "}
+                <button 
+                  onClick={handleLinkReader}
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  Click here to link one.
+                </button>
+              </span>
             </div>
           ) : (
             <div className="bg-green-50 text-green-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
@@ -96,22 +82,8 @@ const KeypadPage = () => {
             </div>
           )}
           
-          {showReaderConnected && popupVisible && (
-            <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
-              <div className={cn(
-                "bg-blue-50 rounded-lg shadow-lg p-4 flex items-center border border-blue-200 transition-opacity duration-300",
-                showReaderConnected ? "opacity-100 animate-fade-in" : "opacity-0 animate-fade-out"
-              )}>
-                <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                  <CreditCard className="h-5 w-5 text-blue-700" />
-                </div>
-                <span className="text-blue-700 font-medium">Reader connected</span>
-              </div>
-            </div>
-          )}
-          
           <div className="flex-1 flex flex-col items-center justify-center mb-8">
-            <div className="text-muted-foreground text-sm mb-2">Amount</div>
+            <div className="text-muted-foreground text-sm mb-2">Enter Amount</div>
             <div className="flex items-baseline">
               <span className="text-2xl mr-2 text-green-500/70">₦</span>
               <div className={cn(
@@ -206,12 +178,12 @@ const KeypadPage = () => {
             <Button 
               variant="outline" 
               onClick={() => setShowRegistrationDialog(false)}
-              className="bg-green-600 hover:bg-green-700 text-white rounded-full"
+              className="bg-green-600 hover:bg-green-700 text-white rounded-lg"
             >
               Back To Edit Amount
             </Button>
             <Button 
-              className="bg-blue-500 hover:bg-blue-600 rounded-full"
+              className="bg-blue-500 hover:bg-blue-600 rounded-lg"
               onClick={() => {
                 setShowRegistrationDialog(false);
                 navigate("/business-registration-check");

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -58,12 +57,11 @@ export const BankAccountForm: React.FC<BankAccountFormProps> = ({
       const selectedBank = BANK_OPTIONS.find(bank => bank.value === bankName);
       const resolvedAccountName = accountName || "John Doe (Demo)";
       
-      // Add the bank account using the context
+      // Add the bank account using the context (without bvn as it's not part of BankAccount interface)
       addBankAccount({
         bankName: selectedBank?.label || bankName,
         accountNumber,
         accountName: resolvedAccountName,
-        bvn,
         isDefault: false
       });
       

@@ -4,19 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Building2, Clock, FileText, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { PaymentInfoDialog } from "@/components/business/PaymentInfoDialog";
+import { PaymentConfirmedDialog } from "@/components/business/PaymentConfirmedDialog";
 
 const BusinessRegistrationCheckPage = () => {
   const navigate = useNavigate();
-  const [showDialog, setShowDialog] = useState(false);
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+  const [showPaymentConfirmed, setShowPaymentConfirmed] = useState(false);
 
   const handleProceedToPayment = () => {
-    setShowDialog(true);
+    setShowPaymentDialog(true);
   };
 
-  const handleConfirmPayment = () => {
-    setShowDialog(false);
-    navigate("/cac-registration");
+  const handlePaymentMade = () => {
+    setShowPaymentDialog(false);
+    setShowPaymentConfirmed(true);
+  };
+
+  const handlePaymentConfirmedDone = () => {
+    setShowPaymentConfirmed(false);
+    navigate("/reader-setup");
   };
 
   const handleDoLater = () => {
@@ -101,7 +108,7 @@ const BusinessRegistrationCheckPage = () => {
         <div className="space-y-3">
           <Button
             onClick={handleProceedToPayment}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full"
           >
             Proceed to Payment
           </Button>
@@ -109,7 +116,7 @@ const BusinessRegistrationCheckPage = () => {
           <Button
             variant="outline"
             onClick={handleDoLater}
-            className="w-full rounded-lg"
+            className="w-full rounded-full"
           >
             DO THIS LATER
           </Button>
@@ -121,26 +128,18 @@ const BusinessRegistrationCheckPage = () => {
         </p>
       </div>
 
-      {/* Confirmation Dialog */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle>Confirm Payment</DialogTitle>
-            <DialogDescription>
-              You will be redirected to complete your CAC registration payment. 
-              Choose your registration type on the next page.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="flex flex-col space-y-2">
-            <Button onClick={handleConfirmPayment} className="w-full">
-              Continue
-            </Button>
-            <Button variant="outline" onClick={() => setShowDialog(false)} className="w-full">
-              Cancel
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Payment Info Dialog */}
+      <PaymentInfoDialog
+        open={showPaymentDialog}
+        onOpenChange={setShowPaymentDialog}
+        onPaymentMade={handlePaymentMade}
+      />
+
+      {/* Payment Confirmed Dialog */}
+      <PaymentConfirmedDialog
+        open={showPaymentConfirmed}
+        onDone={handlePaymentConfirmedDone}
+      />
     </div>
   );
 };

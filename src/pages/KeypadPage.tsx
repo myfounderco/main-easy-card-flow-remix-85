@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, CreditCard, UserCircle, Check } from "lucide-react";
@@ -16,10 +15,27 @@ const KeypadPage = () => {
   const { activeReader, hasBusinessRegistration } = useDevice();
   const navigate = useNavigate();
   const [showRegistrationDialog, setShowRegistrationDialog] = useState(false);
+  const [showConnectedNotification, setShowConnectedNotification] = useState(false);
+  const [hasShownNotification, setHasShownNotification] = useState(false);
   
   const numericAmount = parseFloat(amount) || 0;
   const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
   const isValidAmount = totalAmount > 0;
+  
+  // Show connection notification when reader connects for the first time
+  useEffect(() => {
+    if (activeReader && !hasShownNotification) {
+      setShowConnectedNotification(true);
+      setHasShownNotification(true);
+      
+      // Hide notification after 1 second
+      const timer = setTimeout(() => {
+        setShowConnectedNotification(false);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [activeReader, hasShownNotification]);
   
   // Calculate transaction fee
   const calculateFee = (amount: number) => {
@@ -62,6 +78,14 @@ const KeypadPage = () => {
     <>
       <div className="min-h-screen flex flex-col pb-16 bg-background">
         <div className="flex-1 flex flex-col px-4 pt-8">
+          {/* Connection Notification */}
+          {showConnectedNotification && (
+            <div className="bg-blue-500 text-white p-3 rounded-md mb-4 flex items-center justify-center font-medium text-sm animate-fade-in">
+              <CreditCard className="h-4 w-4 mr-2" />
+              <span>Card Reader Connected</span>
+            </div>
+          )}
+          
           {!activeReader ? (
             <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
               <CreditCard className="h-4 w-4 mr-2" />

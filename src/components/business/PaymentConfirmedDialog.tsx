@@ -12,7 +12,7 @@ interface PaymentConfirmedDialogProps {
 export const PaymentConfirmedDialog = ({ open, onDone }: PaymentConfirmedDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={() => {}}>
-      <DialogContent className="max-w-md" hideCloseButton>
+      <DialogContent className="max-w-md [&>button]:hidden">
         <div className="text-center space-y-4">
           <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
             <CheckCircle2 className="h-8 w-8 text-green-600" />

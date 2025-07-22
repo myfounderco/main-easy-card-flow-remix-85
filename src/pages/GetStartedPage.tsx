@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ const GetStartedPage: React.FC = () => {
   const navigate = useNavigate();
   
   const handleGetStarted = () => {
-    navigate("/login");
+    navigate("/business-registration-check");
   };
 
   const renderHeader = () => (
@@ -162,6 +163,13 @@ const GetStartedPage: React.FC = () => {
           >
             Get Started
             <ArrowRight className="h-5 w-5" />
+          </Button>
+        </div>
+
+        <div className="text-center mt-6">
+          <span className="text-muted-foreground">Already have an account? </span>
+          <Button variant="link" className="p-0 h-auto" onClick={() => navigate("/login")}>
+            Sign in
           </Button>
         </div>
       </main>

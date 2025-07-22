@@ -6,7 +6,7 @@ import ProcessPaymentPage from "./pages/ProcessPaymentPage";
 import ReceiptPage from "./pages/ReceiptPage";
 import HistoryPage from "./pages/HistoryPage";
 import ProfilePage from "./pages/ProfilePage";
-import LoginPage from "./pages/LoginPage";
+import LoginSignupPage from "./pages/LoginSignupPage";
 import GetStartedPage from "./pages/GetStartedPage";
 import ReaderSetupPage from "./pages/ReaderSetupPage";
 import RequestReaderPage from "./pages/RequestReaderPage";
@@ -51,7 +51,7 @@ function App() {
               },
               {
                 path: "/login",
-                element: <LoginPage />,
+                element: <LoginSignupPage />,
               },
               {
                 path: "/get-started",

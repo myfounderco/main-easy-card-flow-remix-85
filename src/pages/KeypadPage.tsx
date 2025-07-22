@@ -80,9 +80,8 @@ const KeypadPage = () => {
         <div className="flex-1 flex flex-col px-4 pt-8">
           {/* Connection Notification */}
           {showConnectedNotification && (
-            <div className="bg-blue-500 text-white p-3 rounded-md mb-4 flex items-center justify-center font-medium text-sm animate-fade-in">
-              <CreditCard className="h-4 w-4 mr-2" />
-              <span>Card Reader Connected</span>
+            <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-fade-in">
+              <p className="text-sm font-medium">Card Reader Connected</p>
             </div>
           )}
           

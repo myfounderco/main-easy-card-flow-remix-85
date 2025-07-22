@@ -20,31 +20,18 @@ export const PaymentConfirmedDialog = ({ open, onDone }: PaymentConfirmedDialogP
           
           <h2 className="text-xl font-semibold text-green-600">Payment Confirmed</h2>
           
-          <p className="text-gray-600">
-            Your payment has been received and your business registration is now in progress.
-          </p>
-          
-          <div className="bg-green-50 p-4 rounded-lg space-y-3">
-            <h3 className="font-medium text-green-700">What happens next:</h3>
-            <div className="space-y-2 text-sm text-green-600">
-              <div className="flex items-start">
-                <Check className="h-4 w-4 mr-2 mt-0.5" />
-                <span>Processing time: 7-14 business days</span>
-              </div>
-              <div className="flex items-start">
-                <Check className="h-4 w-4 mr-2 mt-0.5" />
-                <span>You'll receive updates via email and SMS</span>
-              </div>
-              <div className="flex items-start">
-                <Check className="h-4 w-4 mr-2 mt-0.5" />
-                <span>Transaction limits will be lifted upon completion</span>
-              </div>
-            </div>
+          <div className="bg-blue-500 text-white p-4 rounded-lg space-y-3">
+            <p>Your CAC registration will take 5 days to be finalized. You can proceed with transactions, but your account will be limited to:</p>
+            <ul className="space-y-1 text-sm">
+              <li>• ₦10,000 per transaction</li>
+              <li>• ₦100,000 in total daily transactions</li>
+            </ul>
+            <p className="text-sm">These limits will be lifted once your registration is complete.</p>
           </div>
           
           <Button
             onClick={onDone}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
+            className="w-full bg-green-500 hover:bg-green-600 text-white rounded-lg"
           >
             Done
           </Button>

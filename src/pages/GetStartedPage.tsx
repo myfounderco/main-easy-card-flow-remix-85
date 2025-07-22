@@ -8,7 +8,7 @@ const GetStartedPage: React.FC = () => {
   const navigate = useNavigate();
   
   const handleGetStarted = () => {
-    navigate("/business-registration-check");
+    navigate("/business-name-check");
   };
 
   const renderHeader = () => (

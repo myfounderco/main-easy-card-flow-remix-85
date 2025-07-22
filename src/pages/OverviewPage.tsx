@@ -54,7 +54,7 @@ const OverviewPage = () => {
                 </p>
               </div>
               <CardContent className="p-4">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex justify-between items-center pb-2 border-b border-gray-100">
                     <div className="flex items-center">
                       <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
@@ -210,7 +210,7 @@ const OverviewPage = () => {
         )}
       </div>
       
-      <BottomNav />
+      
     </div>
   );
 };

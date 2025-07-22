@@ -15,6 +15,7 @@ import CacRegistrationDetailsPage from "./pages/CacRegistrationDetailsPage";
 import BusinessUpdatePage from "./pages/BusinessUpdatePage";
 import OverviewPage from "./pages/OverviewPage";
 import BusinessRegistrationCheckPage from "./pages/BusinessRegistrationCheckPage";
+import BusinessNameCheckPage from "./pages/BusinessNameCheckPage";
 import PricingPage from "./components/profile/PricingPage";
 import CacDetailsPage from "./pages/CacDetailsPage";
 import { PaymentProvider } from "./contexts/PaymentContext";
@@ -60,6 +61,10 @@ function App() {
               {
                 path: "/business-registration-check",
                 element: <BusinessRegistrationCheckPage />,
+              },
+              {
+                path: "/business-name-check",
+                element: <BusinessNameCheckPage />,
               },
               {
                 path: "/business-update",

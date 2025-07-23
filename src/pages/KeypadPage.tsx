@@ -199,7 +199,7 @@ const KeypadPage = () => {
               Complete Registration
             </Button>
           </DialogFooter>
-        </div>
+        </DialogContent>
       </Dialog>
       
       <BottomNav />

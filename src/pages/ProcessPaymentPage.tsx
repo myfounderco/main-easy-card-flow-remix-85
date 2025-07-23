@@ -82,7 +82,7 @@ const ProcessPaymentPage = () => {
           <div 
             key={index}
             className={`h-4 w-4 rounded-full ${
-              index < pin.length ? "bg-green-600" : "bg-gray-300"
+              index < pin.length ? "bg-primary" : "bg-gray-300"
             }`}
           />
         ))}
@@ -113,14 +113,14 @@ const ProcessPaymentPage = () => {
       
       <div className="flex-1 flex flex-col items-center justify-center mb-20">
         <div className="w-full max-w-md text-center space-y-6">
-          <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-4 flex items-center font-bold text-sm justify-center max-w-xs mx-auto">
+          <div className="bg-green-50 text-green-700 p-3 rounded-md mb-4 flex items-center font-bold text-sm justify-center max-w-xs mx-auto">
             <CreditCard className="h-4 w-4 mr-2" />
             <span>Leave card inside reader till the transaction is complete.</span>
           </div>
           
           <div>
             <p className="text-green-600 mb-2">You are about to pay</p>
-            <h2 className="text-5xl font-bold mb-2 text-green-600">₦{formatAmount(amount)}</h2>
+            <h2 className="text-5xl font-bold mb-2 text-green-600">{formatAmount(amount)}</h2>
             <p className="text-muted-foreground text-sm">
               Ask the customer to enter their 4-digit PIN
             </p>

@@ -55,19 +55,19 @@ export function Keypad({
     <div className="w-full grid grid-cols-3 gap-4">
       {/* Row 1 */}
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("1")}
       >
         1
       </button>
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("2")}
       >
         2
       </button>
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("3")}
       >
         3
@@ -75,19 +75,19 @@ export function Keypad({
       
       {/* Row 2 */}
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("4")}
       >
         4
       </button>
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("5")}
       >
         5
       </button>
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("6")}
       >
         6
@@ -95,19 +95,19 @@ export function Keypad({
       
       {/* Row 3 */}
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("7")}
       >
         7
       </button>
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("8")}
       >
         8
       </button>
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("9")}
       >
         9
@@ -115,20 +115,20 @@ export function Keypad({
       
       {/* Row 4 */}
       <button 
-        className="py-10 rounded-md flex items-center justify-center text-red-500 text-2xl font-normal transition-all duration-200 active:scale-95"
+        className="py-10 rounded-md flex items-center justify-center text-red-500 text-2xl font-bold transition-all duration-200 active:scale-95"
         onClick={handleDelete}
       >
         {showDeleteLabel ? "Delete" : "C"}
       </button>
       <button 
-        className="py-8 rounded-md flex items-center justify-center text-green-600 text-2xl font-medium transition-all duration-200 active:scale-95 bg-green-50 hover:bg-green-100"
+        className="py-8 rounded-md flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
         onClick={() => handleKeyPress("0")}
       >
         0
       </button>
       {showAddButton ? (
         <button 
-          className="py-10 rounded-md flex items-center justify-center text-blue-500 text-2xl font-normal transition-all duration-200 active:scale-95"
+          className="py-10 rounded-md flex items-center justify-center text-blue-500 text-2xl font-bold transition-all duration-200 active:scale-95"
           onClick={handleAddition}
         >
           +

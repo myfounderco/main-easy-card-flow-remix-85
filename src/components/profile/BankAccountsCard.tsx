@@ -1,9 +1,8 @@
 
 import React from "react";
-import { CreditCard, Plus } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { BankAccountList } from "@/components/profile/BankAccountList";
 import { Button } from "@/components/ui/button";
-import { BankAccountList } from "./BankAccountList";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
 interface BankAccountsCardProps {
   onAddAccount: () => void;
@@ -17,34 +16,32 @@ export const BankAccountsCard: React.FC<BankAccountsCardProps> = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center text-blue-300">
-          <div className="relative h-6 w-6 flex-shrink-0 mr-2">
-            <div className="relative">
-              <CreditCard className="h-5 w-5 text-blue-300" />
-              <div className="absolute -top-1 -right-1 h-3 w-3 bg-blue-300 rounded-full"></div>
-            </div>
+        <CardTitle className="flex items-center text-green-500">
+          <div className="h-6 w-6 flex-shrink-0 mr-2">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-green-500">
+              <path d="M3 21V11L12 5L21 11V21H3Z" stroke="currentColor" strokeWidth="2" />
+              <path d="M6 21V15H10V21" stroke="currentColor" strokeWidth="2" />
+              <path d="M14 21V15H18V21" stroke="currentColor" strokeWidth="2" />
+            </svg>
           </div>
           Bank Accounts
         </CardTitle>
         <CardDescription>
-          Manage your bank accounts for receiving payments
+          Add your bank accounts for deposits
         </CardDescription>
-        <div className="text-sm text-green-600 pt-2">
+        <p className="text-xs text-muted-foreground">
           Payments will reflect instantly or within 24hrs
-        </div>
+        </p>
       </CardHeader>
       <CardContent>
         <BankAccountList onRemove={onRemoveAccount} />
         
-        <div className="flex flex-col space-y-3 mt-4">
-          <Button
-            className="w-full bg-payment-blue hover:bg-payment-darkBlue"
-            onClick={onAddAccount}
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Add New Bank Account
-          </Button>
-        </div>
+        <Button 
+          className="w-full mt-4"
+          onClick={onAddAccount}
+        >
+          Add New Bank Account
+        </Button>
       </CardContent>
     </Card>
   );

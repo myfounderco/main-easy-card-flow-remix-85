@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, CreditCard, Check } from "lucide-react";
+import { ArrowRight, CreditCard, UserCircle, Check } from "lucide-react";
 import { usePayment } from "@/contexts/PaymentContext";
 import { useDevice } from "@/contexts/DeviceContext";
 import { Button } from "@/components/ui/button";
@@ -15,21 +15,23 @@ const KeypadPage = () => {
   const { amount, formatAmount, runningTotal } = usePayment();
   const { activeReader, hasBusinessRegistration } = useDevice();
   const navigate = useNavigate();
+  const [showReaderConnected, setShowReaderConnected] = useState(false);
   const [showRegistrationDialog, setShowRegistrationDialog] = useState(false);
+  
+  useEffect(() => {
+    if (activeReader) {
+      setShowReaderConnected(true);
+      const timer = setTimeout(() => {
+        setShowReaderConnected(false);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [activeReader]);
   
   const numericAmount = parseFloat(amount) || 0;
   const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
   const isValidAmount = totalAmount > 0;
-  
-  // Calculate transaction fee
-  const calculateFee = (amount: number) => {
-    if (amount <= 0) return 0;
-    if (amount < 500) return 5; // Flat fee for small transactions
-    const percentageFee = amount * 0.015; // 1.5%
-    return Math.min(percentageFee, 2500); // Cap at ₦2,500
-  };
-  
-  const transactionFee = calculateFee(totalAmount);
   
   const handleCharge = () => {
     if (!isValidAmount) {
@@ -53,90 +55,78 @@ const KeypadPage = () => {
     
     navigate("/process-payment");
   };
-
-  const handleLinkReader = () => {
-    navigate("/profile", { state: { activeTab: "devices" } });
-  };
   
   return (
-    <>
-      <div className="min-h-screen flex flex-col pb-16 bg-background">
-        <div className="flex-1 flex flex-col px-4 pt-8">
-          {!activeReader ? (
-            <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
-              <CreditCard className="h-4 w-4 mr-2" />
-              <span>
-                Connect card reader (POS) into phone charging point or via Bluetooth.{" "}
-                <button 
-                  onClick={handleLinkReader}
-                  className="text-blue-600 underline hover:text-blue-800"
-                >
-                  Click here to link one.
-                </button>
-              </span>
+    <div className="min-h-screen flex flex-col pb-16 bg-background">
+      <div className="flex-1 flex flex-col px-4 pt-8">
+        {!activeReader ? (
+          <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
+            <CreditCard className="h-4 w-4 mr-2" />
+            <span>Connect card reader (POS) into phone charging point or via Bluetooth.</span>
+          </div>
+        ) : (
+          <div className="bg-green-50 text-green-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
+            <CreditCard className="h-4 w-4 mr-2" />
+            <span>Insert card into reader chip side up.</span>
+          </div>
+        )}
+        
+        {showReaderConnected && (
+          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/20">
+            <div className="bg-blue-50 rounded-lg shadow-lg p-4 flex items-center border border-blue-200">
+              <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <CreditCard className="h-5 w-5 text-blue-700" />
+              </div>
+              <span className="text-blue-700 font-medium">Reader connected</span>
             </div>
-          ) : (
-            <div className="bg-green-50 text-green-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
-              <CreditCard className="h-4 w-4 mr-2" />
-              <span>Reader connected; Insert debit card into reader chip side up.</span>
+          </div>
+        )}
+        
+        <div className="flex-1 flex flex-col items-center justify-center mb-8">
+          <div className="text-muted-foreground text-sm mb-2">Amount</div>
+          <div className="flex items-baseline">
+            <span className="text-2xl mr-2 text-green-500/70">₦</span>
+            <div className={cn(
+              "payment-amount",
+              !amount && !runningTotal && "text-muted-foreground"
+            )}>
+              {runningTotal > 0 ? (
+                <>
+                  <span className="text-green-600 font-bold text-[2.4rem]">{formatAmount(runningTotal.toString())}</span>
+                  {numericAmount > 0 && (
+                    <span className="text-green-600"> + {formatAmount(amount)}</span>
+                  )}
+                </>
+              ) : (
+                <span className="text-green-600">{formatAmount(amount)}</span>
+              )}
+            </div>
+          </div>
+          {runningTotal > 0 && (
+            <div className="mt-2 text-sm font-bold text-muted-foreground text-[1.2rem]">
+              Total: ₦{formatAmount(totalAmount.toString())}
             </div>
           )}
-          
-          <div className="flex-1 flex flex-col items-center justify-center mb-8">
-            <div className="text-muted-foreground text-sm mb-2">Enter Amount</div>
-            <div className="flex items-baseline">
-              <span className="text-2xl mr-2 text-green-500/70">₦</span>
-              <div className={cn(
-                "payment-amount",
-                !amount && !runningTotal && "text-muted-foreground"
-              )}>
-                {runningTotal > 0 ? (
-                  <>
-                    <span className="text-green-600 font-bold text-[2.4rem]">{formatAmount(runningTotal.toString())}</span>
-                    {numericAmount > 0 && (
-                      <span className="text-green-600"> + {formatAmount(amount)}</span>
-                    )}
-                  </>
-                ) : (
-                  <span className="text-green-600">{formatAmount(amount)}</span>
-                )}
-              </div>
-            </div>
-            {runningTotal > 0 && (
-              <div className="mt-2 text-sm font-bold text-muted-foreground text-[1.2rem]">
-                Total: ₦{formatAmount(totalAmount.toString())}
-              </div>
-            )}
-            
-            {/* Transaction Fee Display */}
-            {isValidAmount && (
-              <div className="mt-2 text-sm text-blue-600">
-                Transaction fee: ₦{transactionFee.toFixed(2)}
-              </div>
-            )}
-          </div>
-          
-          <div className="w-full max-w-md mx-auto mb-6">
-            <Keypad />
-          </div>
-          
-          <div className="w-full max-w-md mx-auto mb-8">
-            <Button 
-              onClick={handleCharge} 
-              disabled={!isValidAmount}
-              className="w-full h-14 text-lg relative overflow-hidden group text-white bg-green-500 hover:bg-green-600 rounded-full"
-            >
-              <span className="absolute inset-0 flex items-center justify-center group-hover:translate-y-10 transition-transform duration-200">
-                Charge ₦{formatAmount(totalAmount.toString())}
-              </span>
-              <span className="absolute inset-0 flex items-center justify-center -translate-y-10 group-hover:translate-y-0 transition-transform duration-200">
-                <ArrowRight className="h-6 w-6" />
-              </span>
-            </Button>
-          </div>
         </div>
         
-        <BottomNav />
+        <div className="w-full max-w-md mx-auto mb-6">
+          <Keypad />
+        </div>
+        
+        <div className="w-full max-w-md mx-auto mb-8">
+          <Button 
+            onClick={handleCharge} 
+            disabled={!isValidAmount}
+            className="w-full h-14 text-lg relative overflow-hidden group text-white bg-blue-500 hover:bg-blue-600"
+          >
+            <span className="absolute inset-0 flex items-center justify-center group-hover:translate-y-10 transition-transform duration-200">
+              Charge ₦{formatAmount(totalAmount.toString())}
+            </span>
+            <span className="absolute inset-0 flex items-center justify-center -translate-y-10 group-hover:translate-y-0 transition-transform duration-200">
+              <ArrowRight className="h-6 w-6" />
+            </span>
+          </Button>
+        </div>
       </div>
       
       <Dialog open={showRegistrationDialog} onOpenChange={setShowRegistrationDialog}>
@@ -178,15 +168,15 @@ const KeypadPage = () => {
             <Button 
               variant="outline" 
               onClick={() => setShowRegistrationDialog(false)}
-              className="bg-green-600 hover:bg-green-700 text-white rounded-lg"
+              className="bg-green-600 hover:bg-green-700 text-white"
             >
               Back To Edit Amount
             </Button>
             <Button 
-              className="bg-blue-500 hover:bg-blue-600 rounded-lg"
+              className="bg-blue-500 hover:bg-blue-600"
               onClick={() => {
                 setShowRegistrationDialog(false);
-                navigate("/business-name-check");
+                navigate("/business-registration-check");
               }}
             >
               Complete Registration
@@ -194,7 +184,9 @@ const KeypadPage = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </>
+      
+      <BottomNav />
+    </div>
   );
 };
 

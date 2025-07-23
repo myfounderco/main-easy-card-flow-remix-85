@@ -6,7 +6,6 @@ import { usePayment } from "@/contexts/PaymentContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BottomNav } from "@/components/layout/BottomNav";
-import { DepositAccountCard } from "@/components/history/DepositAccountCard";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -81,8 +80,6 @@ const HistoryPage = () => {
       </div>
       
       <div className="px-4">
-        <DepositAccountCard />
-        
         <div className="relative mb-6">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input

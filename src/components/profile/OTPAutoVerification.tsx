@@ -67,6 +67,7 @@ export const OTPAutoVerification = ({ onVerify, message = "We've sent a 6-digit 
   
   return (
     <div className="space-y-4">
+      <h2 className="text-lg font-medium text-center">Verify Code</h2>
       <p className="text-sm text-center text-muted-foreground">
         {message}
       </p>

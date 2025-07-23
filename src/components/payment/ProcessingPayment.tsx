@@ -169,7 +169,7 @@ export function ProcessingPayment({ onComplete }: ProcessingPaymentProps) {
             </div>
             <h2 className="text-xl font-medium mb-2">Payment Failed</h2>
             <p className="text-center text-muted-foreground mb-6">{errorMessage}</p>
-            <Button onClick={retryTransaction} className="rounded-full">Retry Transaction</Button>
+            <Button onClick={retryTransaction}>Retry Transaction</Button>
           </div>
         );
     }

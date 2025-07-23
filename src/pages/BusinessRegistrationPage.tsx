@@ -1,211 +1,117 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Building, AlertTriangle } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "sonner";
+import { BottomNav } from "@/components/layout/BottomNav";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 
-const BUSINESS_TYPES = [
-  "Sole Proprietorship",
-  "Limited Liability Company",
-  "Partnership",
-  "Non-Profit Organization",
-  "Cooperative",
-  "Franchise",
-  "Small Business"
-];
-
-const BusinessRegistrationPage: React.FC = () => {
+const BusinessRegistrationPage = () => {
+  const [businessName, setBusinessName] = useState("");
+  const [rcNumber, setRcNumber] = useState("");
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    fullName: "",
-    businessName: "",
-    address: "",
-    city: "",
-    state: "",
-    businessType: "",
-    phone: "",
-    email: ""
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  
+  const handleSubmit = () => {
+    if (!businessName || !rcNumber) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+    
+    // Simulate API call
+    setTimeout(() => {
+      setShowConfirmation(true);
+    }, 1000);
   };
-
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  
+  const handleConfirmation = () => {
+    setShowConfirmation(false);
+    toast.success("Business registration details saved!");
+    navigate("/profile");
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Process form submission
-    navigate("/cac-registration");
-  };
-
-  const handleBack = () => {
-    navigate(-1);
-  };
-
+  
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center p-4">
-      <div className="w-full max-w-md">
-        <div className="flex items-center mb-6">
-          <Button variant="ghost" size="icon" onClick={handleBack} className="mr-2">
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <h1 className="text-xl font-semibold">Business Registration</h1>
-        </div>
-
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-center mb-4">
-              <div className="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <Building className="h-6 w-6 text-blue-600" />
-              </div>
-            </div>
-            <CardTitle className="text-center text-lg">Register Your Business</CardTitle>
-            <CardDescription className="text-center">
-              Enter your details for CAC registration as mandated by CBN
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="bg-amber-50 p-3 rounded-md mb-6 flex items-start">
-              <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5 mr-2 flex-shrink-0" />
-              <p className="text-sm text-amber-700">
-                These details will be used for your Corporate Affairs Commission (CAC) registration. 
-                Please ensure the information provided is accurate.
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name</Label>
-                <Input
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  placeholder="Your Full Name"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="businessName">Business Name</Label>
-                <Input
-                  id="businessName"
-                  name="businessName"
-                  value={formData.businessName}
-                  onChange={handleChange}
-                  placeholder="Your Business Name"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="address">Business Address</Label>
-                <Input
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  placeholder="Your Business Address"
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
-                  <Input
-                    id="city"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    placeholder="City"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="state">State</Label>
-                  <Input
-                    id="state"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleChange}
-                    placeholder="State"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="businessType">Business Type</Label>
-                <Select
-                  value={formData.businessType}
-                  onValueChange={(value) => handleSelectChange("businessType", value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Business Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {BUSINESS_TYPES.map(type => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Phone Number"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email Address"
-                  required
-                />
-              </div>
-            </form>
-          </CardContent>
-          <CardFooter>
-            <Button 
-              className="w-full bg-blue-600 hover:bg-blue-700"
-              onClick={handleSubmit}
-            >
-              Continue
-            </Button>
-          </CardFooter>
-        </Card>
+    <div className="min-h-screen flex flex-col pb-16 bg-background">
+      <div className="p-4 border-b border-border">
+        <Button variant="ghost" size="icon" onClick={() => navigate(-1)} className="rounded-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-arrow-left h-5 w-5"
+          >
+            <path d="M3 12h18" />
+            <path d="m12 5-7 7 7 7" />
+          </svg>
+        </Button>
       </div>
+      
+      <div className="flex-1 p-4">
+        <div className="max-w-md mx-auto">
+          <h1 className="text-2xl font-bold text-center mb-2">Business Registration</h1>
+          
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <p className="text-sm text-blue-600 text-center">
+              The Central Bank of Nigeria (CBN) has mandated that all POS operators must have a registered business. Skipping this will limit your account to ₦10,000 per transaction and ₦100,000 daily.
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="businessName">Business Name</Label>
+              <Input
+                type="text"
+                id="businessName"
+                placeholder="Enter business name"
+                value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="rcNumber">RC Number</Label>
+              <Input
+                type="text"
+                id="rcNumber"
+                placeholder="Enter RC number"
+                value={rcNumber}
+                onChange={(e) => setRcNumber(e.target.value)}
+              />
+            </div>
+            
+            <Button className="w-full rounded-full" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Confirm Details</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to submit these details?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button type="button" variant="secondary" onClick={() => setShowConfirmation(false)} className="rounded-full">
+              Edit
+            </Button>
+            <Button type="submit" onClick={handleConfirmation} className="rounded-full">
+              Confirm
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      <BottomNav />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Printer, Share, CheckCircle, AlertTriangle, Copy, Plus } from "lucide-react";
@@ -94,7 +93,7 @@ const ReceiptPage = () => {
           </div>
 
           <div className="text-center text-blue-500 text-sm mb-3">
-            Receipt has been sent to card holder's linked phone number and email (scroll down for more details)
+            Receipt has been sent to cardholder's linked phone number and email (scroll down to more)
           </div>
           
           <div className="w-full mb-4">

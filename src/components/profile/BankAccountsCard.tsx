@@ -27,9 +27,9 @@ export const BankAccountsCard: React.FC<BankAccountsCardProps> = ({
           Bank Accounts
         </CardTitle>
         <CardDescription>
-          Add your bank accounts for deposits
+          <span className="font-bold">Add your bank accounts for deposits</span>
         </CardDescription>
-        <p className="text-xs text-blue-500">
+        <p className="text-xs text-blue-500 font-bold">
           Payments will reflect instantly or within 24hrs
         </p>
       </CardHeader>

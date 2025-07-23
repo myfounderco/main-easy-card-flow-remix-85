@@ -96,8 +96,12 @@ const HistoryPage = () => {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-medium text-blue-700">Deposit Account</p>
-                <p className="text-xs text-blue-600">{depositAccount.bankName} - {depositAccount.accountNumber}</p>
+                <p className="text-sm font-semibold text-gray-700">
+                  {depositAccount.accountName} <span className="text-blue-600">(Deposit Account)</span>
+                </p>
+                <p className="text-xs text-gray-600 font-medium">
+                  {depositAccount.accountNumber} - {depositAccount.bankName}
+                </p>
               </div>
             </div>
           </div>

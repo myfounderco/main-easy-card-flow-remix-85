@@ -64,6 +64,10 @@ const KeypadPage = () => {
     
     navigate("/process-payment");
   };
+
+  const handleLinkReader = () => {
+    navigate("/profile?tab=devices");
+  };
   
   return (
     <div className="min-h-screen flex flex-col pb-16 bg-background">
@@ -71,17 +75,25 @@ const KeypadPage = () => {
         {!activeReader ? (
           <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
             <CreditCard className="h-4 w-4 mr-2" />
-            <span>Connect card reader (POS) into phone charging point or via Bluetooth.</span>
+            <span>
+              Plug card reader (POS) into phone charging port or connect via Bluetooth.{" "}
+              <button 
+                onClick={handleLinkReader}
+                className="underline hover:text-blue-800"
+              >
+                Click here to link one
+              </button>
+            </span>
           </div>
         ) : (
           <div className="bg-green-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
             <CreditCard className="h-4 w-4 mr-2" />
-            <span>Reader connected, Insert card with the chip side up.</span>
+            <span>Reader now connected, please insert the card with the chip side up.</span>
           </div>
         )}
         
         <div className="flex-1 flex flex-col items-center justify-center mb-8">
-          <div className="text-muted-foreground text-sm mb-2">Amount</div>
+          <div className="text-muted-foreground text-sm mb-2">Enter Amount</div>
           <div className="flex items-baseline">
             <span className="text-2xl mr-2 text-green-500/70">₦</span>
             <div className={cn(

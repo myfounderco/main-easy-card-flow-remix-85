@@ -14,25 +14,88 @@ const ProfilePage = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(location.state?.activeTab || "profile");
 
+  // Callback functions for the components
+  const handleEditBusiness = () => {
+    console.log("Edit business clicked");
+  };
+
+  const handleAddAccount = () => {
+    console.log("Add account clicked");
+  };
+
+  const handleRemoveAccount = (accountId: string) => {
+    console.log("Remove account clicked:", accountId);
+  };
+
+  const handleAddCacDetails = () => {
+    console.log("Add CAC details clicked");
+  };
+
+  const handleChangePassword = () => {
+    console.log("Change password clicked");
+  };
+
+  const handleLogout = () => {
+    console.log("Logout clicked");
+  };
+
+  const handleChatSupport = () => {
+    console.log("Chat support clicked");
+  };
+
+  const handleContactVia = (platform: string) => {
+    console.log("Contact via clicked:", platform);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <ProfileHeader />
       
       <div className="px-4 pb-20">
-        <ProfileTabs activeTab={activeTab} onTabChange={setActiveTab} />
+        <ProfileTabs 
+          activeTab={activeTab} 
+          setActiveTab={setActiveTab}
+          onAddAccount={handleAddAccount}
+          onRemoveAccount={handleRemoveAccount}
+          onAddCacDetails={handleAddCacDetails}
+          onChangePassword={handleChangePassword}
+          onLogout={handleLogout}
+          onChatSupport={handleChatSupport}
+          onContactVia={handleContactVia}
+        />
         
         <div className="mt-6 space-y-6">
           {activeTab === "profile" && (
             <>
-              <BusinessInfoCard />
-              <BankAccountsCard />
+              <BusinessInfoCard onEditBusiness={handleEditBusiness} />
+              <BankAccountsCard 
+                onAddAccount={handleAddAccount}
+                onRemoveAccount={handleRemoveAccount}
+              />
               <DevicesCard />
-              <SettingsCard />
-              <SupportSection />
+              <SettingsCard 
+                onAddCacDetails={handleAddCacDetails}
+                onChangePassword={handleChangePassword}
+                onLogout={handleLogout}
+              />
+              <SupportSection 
+                onChatSupport={handleChatSupport}
+                onContactVia={handleContactVia}
+              />
             </>
           )}
           
-          {activeTab === "accounts" && <AccountsTab />}
+          {activeTab === "accounts" && (
+            <AccountsTab 
+              onAddAccount={handleAddAccount}
+              onRemoveAccount={handleRemoveAccount}
+              onAddCacDetails={handleAddCacDetails}
+              onChangePassword={handleChangePassword}
+              onLogout={handleLogout}
+              onChatSupport={handleChatSupport}
+              onContactVia={handleContactVia}
+            />
+          )}
           
           {activeTab === "devices" && <DevicesCard />}
         </div>

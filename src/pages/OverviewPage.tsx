@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BottomNav } from "@/components/layout/BottomNav";
 import { useNavigate } from "react-router-dom";
 
 const OverviewPage = () => {
@@ -33,7 +32,7 @@ const OverviewPage = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col pb-16 bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
       <div className="p-4 border-b border-border">
         <h1 className="text-2xl font-medium">Overview</h1>
       </div>
@@ -41,7 +40,7 @@ const OverviewPage = () => {
       <div className="flex-1 p-4 space-y-6">
         {currentScreen === 'pricing' ? (
           <div className="space-y-4">
-            <h2 className="text-xl font-medium text-gray-500">Our Offering</h2>
+            <h2 className="text-xl font-medium text-blue-500">Reasons to choose us</h2>
             
             <Card className="overflow-hidden">
               <div className="bg-blue-500 text-white p-4">
@@ -54,7 +53,7 @@ const OverviewPage = () => {
                 </p>
               </div>
               <CardContent className="p-4">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex justify-between items-center pb-2 border-b border-gray-100">
                     <div className="flex items-center">
                       <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
@@ -152,7 +151,7 @@ const OverviewPage = () => {
           </div>
         ) : (
           <div className="space-y-4">
-            <h2 className="text-xl font-medium text-gray-500">The Right Partner for Your Business</h2>
+            <h2 className="text-xl font-medium text-blue-500">The Right Partner for your business</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card>
@@ -209,8 +208,6 @@ const OverviewPage = () => {
           </div>
         )}
       </div>
-      
-      <BottomNav />
     </div>
   );
 };

@@ -2,6 +2,7 @@
 import React from "react";
 import { usePayment } from "@/contexts/PaymentContext";
 import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 interface KeypadProps {
   onKeyPress?: (digit: string) => void;
@@ -115,10 +116,10 @@ export function Keypad({
       
       {/* Row 4 */}
       <button 
-        className="py-10 rounded-full flex items-center justify-center text-red-500 text-2xl font-bold transition-all duration-200 active:scale-95"
+        className="py-10 rounded-full flex items-center justify-center text-red-500 text-2xl font-bold transition-all duration-200 active:scale-95 bg-red-50"
         onClick={handleDelete}
       >
-        {showDeleteLabel ? "Delete" : "C"}
+        <ArrowLeft className="h-5 w-5" />
       </button>
       <button 
         className="py-8 rounded-full flex items-center justify-center text-blue-500 text-2xl font-medium transition-all duration-200 active:scale-95 bg-gray-50"
@@ -128,7 +129,7 @@ export function Keypad({
       </button>
       {showAddButton ? (
         <button 
-          className="py-10 rounded-full flex items-center justify-center text-blue-500 text-2xl font-bold transition-all duration-200 active:scale-95"
+          className="py-10 rounded-full flex items-center justify-center text-blue-500 text-xl font-normal transition-all duration-200 active:scale-95"
           onClick={handleAddition}
         >
           +

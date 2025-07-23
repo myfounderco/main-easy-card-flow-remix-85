@@ -24,7 +24,7 @@ export const DevicesCard: React.FC = () => {
         <CardDescription>
           Manage your existing readers or request a new one
         </CardDescription>
-        <div className="text-sm text-blue-500 pt-2">
+        <div className="text-sm text-blue-500 pt-2 font-semibold">
           Plug your reader into your phone charging port or connect via Bluetooth.
         </div>
       </CardHeader>

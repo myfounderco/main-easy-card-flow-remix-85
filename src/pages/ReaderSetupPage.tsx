@@ -46,8 +46,8 @@ const ReaderSetupPage = () => {
         <h1 className="text-2xl font-bold text-center mb-2">EasyPay Card Reader</h1>
         <p className="text-base text-gray-600 text-center mb-6">Let's get you set up with a card reader</p>
         
-        <p className="text-base text-gray-600 text-center mb-6">
-          Do you already have a card reader or would you like to request one?
+        <p className="text-base text-blue-600 font-bold text-center mb-6">
+          Request a new Card Reader (POS) if you do not already have one. NOTE: Your first card reader is free and will be delivered to you at no cost
         </p>
 
         <Card 
@@ -89,7 +89,7 @@ const ReaderSetupPage = () => {
         <Button 
           onClick={handleContinue}
           disabled={!selectedOption}
-          className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600 text-white"
+          className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
         >
           Continue
         </Button>

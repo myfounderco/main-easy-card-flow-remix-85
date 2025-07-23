@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, CreditCard, UserCircle, Check } from "lucide-react";
@@ -20,15 +21,17 @@ const KeypadPage = () => {
   const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
   const isValidAmount = totalAmount > 0;
   
+  // Calculate fee based on the pricing structure
   const calculateFee = (value: number) => {
     let calculatedFee = 0;
     
     if (value < 500) {
-      calculatedFee = 5;
+      calculatedFee = 5; // Flat fee of ₦5 for transactions below ₦500
     } else if (value >= 500 && value < 1000) {
-      calculatedFee = value * 0.01;
+      calculatedFee = value * 0.01; // 1% for transactions between ₦501-₦999
     } else {
-      calculatedFee = value * 0.015;
+      calculatedFee = value * 0.015; // 1.5% for transactions ₦1,000 and above
+      // Cap the fee at ₦2,500
       if (calculatedFee > 2500) {
         calculatedFee = 2500;
       }
@@ -45,6 +48,7 @@ const KeypadPage = () => {
       return;
     }
     
+    // Check transaction limits for unregistered users
     if (!hasBusinessRegistration && totalAmount > 10000) {
       setShowRegistrationDialog(true);
       return;
@@ -114,6 +118,7 @@ const KeypadPage = () => {
             </div>
           )}
           
+          {/* Transaction fee display */}
           {isValidAmount && (
             <div className="mt-2 text-sm text-blue-500">
               Transaction fee: ₦{transactionFee.toFixed(2)}
@@ -180,12 +185,12 @@ const KeypadPage = () => {
             <Button 
               variant="outline" 
               onClick={() => setShowRegistrationDialog(false)}
-              className="bg-green-600 hover:bg-green-700 text-white rounded-md"
+              className="bg-green-600 hover:bg-green-700 text-white rounded-full"
             >
               Back To Edit Amount
             </Button>
             <Button 
-              className="bg-blue-500 hover:bg-blue-600 rounded-md"
+              className="bg-blue-500 hover:bg-blue-600 rounded-full"
               onClick={() => {
                 setShowRegistrationDialog(false);
                 navigate("/business-registration-check");

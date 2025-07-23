@@ -30,7 +30,7 @@ const CacRegistrationDetailsPage = () => {
       setError("All fields are required");
       return;
     }
-    navigate("/reader-setup");
+    navigate("/reader-setup"); // Navigate to reader setup instead of previous route
   };
 
   return (
@@ -100,7 +100,7 @@ const CacRegistrationDetailsPage = () => {
             </Select>
           </div>
 
-          <Button className="w-full rounded-md" onClick={handleSubmit}>
+          <Button className="w-full" onClick={handleSubmit}>
             Confirm Registration
           </Button>
         </div>

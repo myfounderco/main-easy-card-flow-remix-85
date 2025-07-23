@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, X, Smartphone, MapPin } from "lucide-react";
@@ -24,7 +23,6 @@ const RequestReaderPage = () => {
     busStop: ""
   });
   
-  // Check if the user is coming from reader setup (first-time flow) or profile
   const isFromReaderSetup = location.state?.fromReaderSetup === true;
   
   const handleClose = () => {
@@ -49,9 +47,7 @@ const RequestReaderPage = () => {
   };
   
   const handleRequestSubmit = () => {
-    // Here you would handle the actual request submission
     toast.success("Reader request submitted successfully!");
-    // Navigate to profile page or overview based on where user came from
     setTimeout(() => {
       if (isFromReaderSetup) {
         navigate("/overview");
@@ -64,7 +60,6 @@ const RequestReaderPage = () => {
   const toggleRegisteredAddress = () => {
     setUseRegisteredAddress(!useRegisteredAddress);
     if (!useRegisteredAddress) {
-      // Populate with mock registered address
       setAddress({
         street: "123 Business Street",
         city: "Lagos",
@@ -72,7 +67,6 @@ const RequestReaderPage = () => {
         busStop: "Ikeja Bus Stop"
       });
     } else {
-      // Clear the address
       setAddress({
         street: "",
         city: "",
@@ -85,7 +79,6 @@ const RequestReaderPage = () => {
   const toggleLocationServices = () => {
     setUseLocationServices(!useLocationServices);
     if (!useLocationServices) {
-      // Mock getting location
       toast.info("Fetching your current location...");
       setTimeout(() => {
         setAddress({
@@ -124,6 +117,7 @@ const RequestReaderPage = () => {
             </CardHeader>
             <form onSubmit={handleAddressSubmit}>
               <CardContent className="space-y-4">
+                
                 <div className="flex items-center space-x-2 p-3 bg-secondary/30 rounded-lg mb-4">
                   <Switch 
                     id="registeredAddress" 
@@ -187,8 +181,8 @@ const RequestReaderPage = () => {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button type="submit" className="w-full bg-payment-blue hover:bg-payment-darkBlue">
-                  Continue
+                <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md">
+                  Submit
                 </Button>
               </CardFooter>
             </form>
@@ -204,6 +198,7 @@ const RequestReaderPage = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              
               <RadioGroup value={readerType} onValueChange={handleReaderTypeSelect}>
                 <div 
                   className={`flex items-center space-x-4 border rounded-lg p-4 cursor-pointer ${readerType === "lightning" ? "border-primary bg-primary/5" : "hover:border-primary"}`}
@@ -262,14 +257,14 @@ const RequestReaderPage = () => {
               
               <div className="pt-4">
                 <h3 className="font-medium mb-2">Delivery Information</h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-blue-500">
                   Your free card reader will be delivered within 3-5 business days.
                 </p>
               </div>
             </CardContent>
             <CardFooter>
               <Button 
-                className="w-full bg-payment-blue hover:bg-payment-darkBlue"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md"
                 onClick={handleRequestSubmit}
                 disabled={!readerType}
               >

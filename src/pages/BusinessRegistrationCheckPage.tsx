@@ -1,168 +1,142 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle2, FileText, Info, AlertTriangle, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft, Building2, FileText, Clock } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { useDevice } from "@/contexts/DeviceContext";
 
 const BusinessRegistrationCheckPage = () => {
   const navigate = useNavigate();
   const { setHasBusinessRegistration } = useDevice();
-  const [showLimitsDialog, setShowLimitsDialog] = useState(false);
-  
-  const handleBack = () => {
-    navigate("/get-started");
-  };
-  
-  const handleHasBusiness = () => {
-    setHasBusinessRegistration(true);
+  const [showLaterDialog, setShowLaterDialog] = useState(false);
+
+  const handleContinueWithRC = () => {
     navigate("/cac-details");
   };
-  
-  const handleNeedsBusiness = () => {
+
+  const handleRegisterNow = () => {
     navigate("/cac-registration");
   };
-  
+
   const handleDoLater = () => {
-    setShowLimitsDialog(true);
+    setShowLaterDialog(true);
   };
-  
-  const confirmSkip = () => {
-    setHasBusinessRegistration(false);
+
+  const confirmDoLater = () => {
+    setShowLaterDialog(false);
     navigate("/reader-setup");
   };
-  
+
   return (
-    <div className="min-h-screen bg-background p-4">
-      <div className="max-w-md mx-auto pt-6">
-        <Card className="bg-green-50 border-green-200 mb-6">
-          <CardContent className="p-4">
-            <p className="text-green-800 text-sm">
-              The Central Bank of Nigeria (CBN) has mandated that all POS operators must have a registered business. Skipping this will limit your account to ₦10,000 per transaction and ₦300,000 daily.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <h1 className="text-2xl font-bold text-center mb-2">Business Registration Required</h1>
-        
-        <div className="space-y-4 mb-8">
-          <Card className="border-2 border-primary/20">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center">
-                <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
-                I already have a registered business
+    <div className="min-h-screen bg-background">
+      <div className="p-4 border-b border-border flex items-center">
+        <Button variant="ghost" size="icon" onClick={() => navigate(-1)} className="mr-2">
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <h1 className="text-xl font-medium">Business Registration</h1>
+      </div>
+
+      <div className="p-4 max-w-md mx-auto">
+        <div className="text-center mb-6">
+          <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Building2 className="h-8 w-8 text-blue-600" />
+          </div>
+          <h2 className="text-xl font-bold mb-2">Complete Your Registration</h2>
+          <p className="text-muted-foreground text-sm">
+            The CBN requires all POS operators to have registered businesses
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <Card className="border-2 border-blue-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center text-lg">
+                <FileText className="h-5 w-5 mr-2 text-blue-600" />
+                I have an RC Number
               </CardTitle>
-              <CardDescription>
-                Proceed with your existing RC number
-              </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-0">
+              <p className="text-sm text-muted-foreground mb-4">
+                Use your existing business registration certificate
+              </p>
               <Button 
-                className="w-full bg-green-600 hover:bg-green-700"
-                onClick={handleHasBusiness}
+                onClick={handleContinueWithRC}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md"
               >
                 Continue with my RC Number
               </Button>
             </CardContent>
           </Card>
-          
-          <Card className="border-2 border-primary/20">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center">
-                <FileText className="h-5 w-5 text-green-500 mr-2" />
-                I want to Register my business
+
+          <Card className="border-2 border-green-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center text-lg">
+                <Building2 className="h-5 w-5 mr-2 text-green-600" />
+                Register New Business
               </CardTitle>
-              <CardDescription>
-                Registration takes approximately 5 days to complete. We'll notify you when it's done.
-              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="mb-3">
-                <p className="text-sm text-muted-foreground">
-                  <span className="line-through">₦22,000</span> 
-                  <span className="text-green-600 font-medium ml-2">₦12,000</span>
-                  <span className="ml-2 text-green-600">(₦10,000 subsidy covered by EasyPay to help you get started)</span>
-                </p>
-              </div>
+            <CardContent className="pt-0">
+              <p className="text-sm text-muted-foreground mb-4">
+                We'll help you register your business with CAC
+              </p>
               <Button 
-                className="w-full bg-green-600 hover:bg-green-700"
-                onClick={handleNeedsBusiness}
+                onClick={handleRegisterNow}
+                className="w-full bg-green-500 hover:bg-green-600 text-white rounded-md"
               >
                 Register my business now
               </Button>
             </CardContent>
           </Card>
+
+          <Card className="border-2 border-orange-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center text-lg">
+                <Clock className="h-5 w-5 mr-2 text-orange-600" />
+                Skip for Now
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <p className="text-sm text-muted-foreground mb-4">
+                Limited to ₦10,000 per transaction, ₦300,000 daily
+              </p>
+              <Button 
+                onClick={handleDoLater}
+                variant="outline"
+                className="w-full border-orange-300 text-orange-600 hover:bg-orange-50 rounded-md"
+              >
+                DO THIS LATER
+              </Button>
+            </CardContent>
+          </Card>
         </div>
-        
-        <div className="text-center">
-          <Button 
-            variant="outline" 
-            onClick={handleDoLater}
-            className="w-full text-blue-600 font-medium bg-white border-blue-300"
-          >
-            DO THIS LATER
-          </Button>
-        </div>
-        
-        <p className="text-center text-sm text-blue-600 mt-4">
-          Registering your business increases your transaction limits and builds trust with your customers
-        </p>
       </div>
-      
-      <Dialog open={showLimitsDialog} onOpenChange={setShowLimitsDialog}>
-        <DialogContent>
+
+      <Dialog open={showLaterDialog} onOpenChange={setShowLaterDialog}>
+        <DialogContent className="max-w-sm">
           <DialogHeader>
-            <DialogTitle className="flex items-center text-amber-500">
-              <AlertTriangle className="h-5 w-5 mr-2" />
-              Transaction Limitations
-            </DialogTitle>
-            <DialogDescription className="text-gray-600">
-              Without business registration, transaction limits will be restricted:
+            <DialogTitle>Transaction Limits Apply</DialogTitle>
+            <DialogDescription>
+              Without business registration, your account will be limited to:
+              <br />• ₦10,000 per transaction
+              <br />• ₦300,000 daily limit
+              <br />• ₦1,000,000 monthly limit
             </DialogDescription>
           </DialogHeader>
-          
-          <div className="space-y-3 py-2">
-            <div className="flex items-start">
-              <div className="h-5 w-5 mr-2 flex items-center justify-center">
-                <Check className="h-4 w-4 text-green-500" />
-              </div>
-              <p className="text-sm text-green-600">Maximum transaction amount: ₦10,000</p>
-            </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 mr-2 flex items-center justify-center">
-                <Check className="h-4 w-4 text-green-500" />
-              </div>
-              <p className="text-sm text-green-600">Daily transaction limit: ₦300,000</p>
-            </div>
-            <div className="flex items-start">
-              <div className="h-5 w-5 mr-2 flex items-center justify-center">
-                <Check className="h-4 w-4 text-green-500" />
-              </div>
-              <p className="text-sm text-green-600">Monthly transaction limit: ₦1,000,000</p>
-            </div>
-            
-            <div className="mt-4 pt-2 border-t">
-              <p className="text-sm text-muted-foreground">
-                These limits may affect your business operations. We recommend completing your business registration.
-              </p>
-            </div>
-          </div>
-          
-          <DialogFooter className="flex flex-col space-y-6 sm:space-y-6">
-            <Button 
-              variant="outline" 
-              onClick={() => setShowLimitsDialog(false)}
-              className="bg-green-600 hover:bg-green-700 text-white"
+          <DialogFooter className="flex-col space-y-2">
+            <Button
+              onClick={confirmDoLater}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-md"
             >
-              Go Back to CAC Registration
+              Continue with Limits
             </Button>
-            <Button 
-              className="bg-blue-500 hover:bg-blue-600" 
-              onClick={confirmSkip}
+            <Button
+              onClick={() => setShowLaterDialog(false)}
+              variant="outline"
+              className="w-full rounded-md"
             >
-              Continue without registration
+              Go Back
             </Button>
           </DialogFooter>
         </DialogContent>

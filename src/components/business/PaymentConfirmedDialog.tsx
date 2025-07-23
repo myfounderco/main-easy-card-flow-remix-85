@@ -2,7 +2,7 @@
 import React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Check } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 interface PaymentConfirmedDialogProps {
   open: boolean;

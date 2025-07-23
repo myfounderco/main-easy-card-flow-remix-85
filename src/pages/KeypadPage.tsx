@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, CreditCard, UserCircle, Check } from "lucide-react";
+import { ArrowRight, CreditCard, Check } from "lucide-react";
 import { usePayment } from "@/contexts/PaymentContext";
 import { useDevice } from "@/contexts/DeviceContext";
 import { Button } from "@/components/ui/button";
@@ -15,27 +16,10 @@ const KeypadPage = () => {
   const { activeReader, hasBusinessRegistration } = useDevice();
   const navigate = useNavigate();
   const [showRegistrationDialog, setShowRegistrationDialog] = useState(false);
-  const [showConnectedNotification, setShowConnectedNotification] = useState(false);
-  const [hasShownNotification, setHasShownNotification] = useState(false);
   
   const numericAmount = parseFloat(amount) || 0;
   const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
   const isValidAmount = totalAmount > 0;
-  
-  // Show connection notification when reader connects for the first time
-  useEffect(() => {
-    if (activeReader && !hasShownNotification) {
-      setShowConnectedNotification(true);
-      setHasShownNotification(true);
-      
-      // Hide notification after 1 second
-      const timer = setTimeout(() => {
-        setShowConnectedNotification(false);
-      }, 1000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [activeReader, hasShownNotification]);
   
   // Calculate transaction fee
   const calculateFee = (amount: number) => {
@@ -78,13 +62,6 @@ const KeypadPage = () => {
     <>
       <div className="min-h-screen flex flex-col pb-16 bg-background">
         <div className="flex-1 flex flex-col px-4 pt-8">
-          {/* Connection Notification */}
-          {showConnectedNotification && (
-            <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-fade-in">
-              <p className="text-sm font-medium">Card Reader Connected</p>
-            </div>
-          )}
-          
           {!activeReader ? (
             <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
               <CreditCard className="h-4 w-4 mr-2" />
@@ -101,7 +78,7 @@ const KeypadPage = () => {
           ) : (
             <div className="bg-green-50 text-green-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
               <CreditCard className="h-4 w-4 mr-2" />
-              <span>Insert card into reader chip side up.</span>
+              <span>Reader connected; Insert debit card into reader chip side up.</span>
             </div>
           )}
           
@@ -209,7 +186,7 @@ const KeypadPage = () => {
               className="bg-blue-500 hover:bg-blue-600 rounded-lg"
               onClick={() => {
                 setShowRegistrationDialog(false);
-                navigate("/business-registration-check");
+                navigate("/business-name-check");
               }}
             >
               Complete Registration

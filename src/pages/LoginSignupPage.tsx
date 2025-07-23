@@ -19,20 +19,16 @@ const LoginSignupPage = () => {
   const [loginEmailOrPhone, setLoginEmailOrPhone] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-  const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [signupFirstName, setSignupFirstName] = useState("");
   const [signupLastName, setSignupLastName] = useState("");
   const [signupPhone, setSignupPhone] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState<Date>();
-  const [pin, setPin] = useState("");
+  const [passcode, setPasscode] = useState("");
   const [bankAccount, setBankAccount] = useState("");
   const [bvn, setBvn] = useState("");
   const [selectedBank, setSelectedBank] = useState("");
   const [showLoginPassword, setShowLoginPassword] = useState(false);
-  const [showSignupPassword, setShowSignupPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [showPin, setShowPin] = useState(false);
+  const [showPasscode, setShowPasscode] = useState(false);
   const [showOtpVerification, setShowOtpVerification] = useState(false);
   const navigate = useNavigate();
 
@@ -53,16 +49,12 @@ const LoginSignupPage = () => {
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!signupFirstName || !signupLastName || !signupEmail || !signupPassword || !signupPhone || !dateOfBirth || !pin || !bankAccount || !bvn || !selectedBank) {
+    if (!signupFirstName || !signupLastName || !signupEmail || !signupPhone || !dateOfBirth || !passcode || !bankAccount || !bvn || !selectedBank) {
       toast.error("Please fill in all required fields");
       return;
     }
-    if (signupPassword !== signupConfirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
-    if (pin.length !== 4) {
-      toast.error("PIN must be 4 digits");
+    if (passcode.length !== 4) {
+      toast.error("Passcode must be 4 digits");
       return;
     }
     
@@ -71,7 +63,7 @@ const LoginSignupPage = () => {
 
   const handleOtpVerification = () => {
     toast.success("Account created successfully!");
-    navigate("/business-registration-check");
+    navigate("/business-name-check");
     setShowOtpVerification(false);
   };
 
@@ -178,7 +170,7 @@ const LoginSignupPage = () => {
                 </Button>
               </form>
               
-              <div className="mt-6">
+              <div className="mt-6 text-center">
                 <Button
                   variant="outline"
                   onClick={handleBiometricLogin}
@@ -187,6 +179,14 @@ const LoginSignupPage = () => {
                   <Fingerprint className="h-5 w-5" />
                   <span>Login with Biometrics</span>
                 </Button>
+              </div>
+              
+              <div className="mt-4 text-center text-xs text-gray-500">
+                By continuing, you agree to EasyPay's{" "}
+                <span className="text-blue-600 underline">Terms of Service</span>{" "}
+                and{" "}
+                <span className="text-blue-600 underline">Privacy Policy</span>, 
+                and to receive periodic emails with updates.
               </div>
             </TabsContent>
             
@@ -248,7 +248,7 @@ const LoginSignupPage = () => {
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal h-12",
                           !dateOfBirth && "text-muted-foreground"
                         )}
                       >
@@ -266,6 +266,9 @@ const LoginSignupPage = () => {
                         }
                         initialFocus
                         className="pointer-events-auto"
+                        captionLayout="dropdown-buttons"
+                        fromYear={1900}
+                        toYear={new Date().getFullYear()}
                       />
                     </PopoverContent>
                   </Popover>
@@ -282,16 +285,16 @@ const LoginSignupPage = () => {
                 </Button>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-pin">Create 4-Digit PIN</Label>
+                  <Label htmlFor="signup-passcode">Create 4-Digit Passcode</Label>
                   <div className="relative">
                     <Input
-                      id="signup-pin"
-                      type={showPin ? "text" : "password"}
-                      placeholder="Create a 4-digit PIN"
-                      value={pin}
+                      id="signup-passcode"
+                      type={showPasscode ? "text" : "password"}
+                      placeholder="Create a 4-digit passcode"
+                      value={passcode}
                       onChange={(e) => {
                         const value = e.target.value.replace(/\D/g, '').slice(0, 4);
-                        setPin(value);
+                        setPasscode(value);
                       }}
                       maxLength={4}
                       required
@@ -301,55 +304,9 @@ const LoginSignupPage = () => {
                       variant="ghost"
                       size="icon"
                       className="absolute right-2 top-1/2 -translate-y-1/2"
-                      onClick={() => setShowPin(!showPin)}
+                      onClick={() => setShowPasscode(!showPasscode)}
                     >
-                      {showPin ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
-                  <div className="relative">
-                    <Input
-                      id="signup-password"
-                      type={showSignupPassword ? "text" : "password"}
-                      placeholder="Create a password"
-                      value={signupPassword}
-                      onChange={(e) => setSignupPassword(e.target.value)}
-                      required
-                    />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-1/2 -translate-y-1/2"
-                      onClick={() => setShowSignupPassword(!showSignupPassword)}
-                    >
-                      {showSignupPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="signup-confirm-password">Confirm Password</Label>
-                  <div className="relative">
-                    <Input
-                      id="signup-confirm-password"
-                      type={showConfirmPassword ? "text" : "password"}
-                      placeholder="Confirm your password"
-                      value={signupConfirmPassword}
-                      onChange={(e) => setSignupConfirmPassword(e.target.value)}
-                      required
-                    />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-1/2 -translate-y-1/2"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    >
-                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {showPasscode ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </Button>
                   </div>
                 </div>
@@ -371,6 +328,22 @@ const LoginSignupPage = () => {
                 </div>
                 
                 <div className="space-y-2">
+                  <Label htmlFor="bank-select">Select Bank</Label>
+                  <Select value={selectedBank} onValueChange={setSelectedBank} required>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your bank" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {banks.map((bank) => (
+                        <SelectItem key={bank} value={bank}>
+                          {bank}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
                   <Label htmlFor="bvn">Bank Verification Number (BVN)</Label>
                   <Input
                     id="bvn"
@@ -387,22 +360,6 @@ const LoginSignupPage = () => {
                   <p className="text-xs text-blue-600">
                     Don't know your BVN? Dial *565*0# on your phone to check.
                   </p>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="bank-select">Select Bank</Label>
-                  <Select value={selectedBank} onValueChange={setSelectedBank} required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your bank" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {banks.map((bank) => (
-                        <SelectItem key={bank} value={bank}>
-                          {bank}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
                 </div>
                 
                 <Button type="submit" className="w-full">

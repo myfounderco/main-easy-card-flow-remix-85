@@ -1,8 +1,9 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, FileText, ArrowLeft } from "lucide-react";
+import { CheckCircle2, FileText, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PaymentInfoDialog } from "@/components/business/PaymentInfoDialog";
 import { PaymentConfirmedDialog } from "@/components/business/PaymentConfirmedDialog";
 
@@ -35,90 +36,76 @@ const BusinessNameCheckPage = () => {
 
   return (
     <div className="min-h-screen bg-background p-4">
-      <div className="max-w-md mx-auto">
-        <div className="flex items-center mb-6">
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={() => navigate(-1)}
-            className="mr-2"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <h1 className="text-xl font-semibold">Business Registration Required</h1>
-        </div>
-
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-          <p className="text-sm text-green-700">
+      <div className="max-w-md mx-auto pt-6">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <p className="text-sm text-blue-700">
             The Central Bank of Nigeria (CBN) has mandated that all POS operators must have a registered business. 
-            Skipping this will limit your account to ₦10,000 per transaction and ₦300,000 daily.
+            Skipping this will limit your account to ₦10,000 per transaction and ₦100,000 daily.
           </p>
         </div>
 
-        <div className="space-y-4">
-          <Card className="border-2 border-green-200">
-            <CardContent className="p-4">
-              <div className="flex items-start space-x-3">
-                <div className="mt-1">
-                  <CheckCircle className="h-5 w-5 text-green-600" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-medium mb-2">I already have a registered business</h3>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Proceed with your existing RC number
-                  </p>
-                  <Button 
-                    onClick={handleContinueWithRC}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    Continue with my RC Number
-                  </Button>
-                </div>
-              </div>
+        <h1 className="text-2xl font-bold text-center mb-2">Business Registration Required</h1>
+        
+        <div className="space-y-4 mb-8">
+          <Card className="border-2 border-primary/20">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex items-center">
+                <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+                I already have a registered business
+              </CardTitle>
+              <CardDescription>
+                Proceed with your existing RC number
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button 
+                className="w-full bg-green-600 hover:bg-green-700"
+                onClick={handleContinueWithRC}
+              >
+                Continue with my RC Number
+              </Button>
             </CardContent>
           </Card>
-
-          <Card>
-            <CardContent className="p-4">
-              <div className="flex items-start space-x-3">
-                <div className="mt-1">
-                  <FileText className="h-5 w-5 text-green-600" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-medium mb-2">I want to Register my business</h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Registration takes approximately 5 days to complete. We'll notify you when it's done.
-                  </p>
-                  <div className="text-sm mb-3">
-                    <span className="line-through text-gray-500">₦22,000</span>
-                    <span className="text-green-600 font-medium ml-2">₦12,000</span>
-                    <span className="text-xs text-green-600 block">
-                      (₦10,000 subsidy covered by EasyPay to help you get started)
-                    </span>
-                  </div>
-                  <Button 
-                    onClick={handleRegisterBusiness}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    Register my business now
-                  </Button>
-                </div>
+          
+          <Card className="border-2 border-primary/20">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex items-center">
+                <FileText className="h-5 w-5 text-green-500 mr-2" />
+                I want to Register my business
+              </CardTitle>
+              <CardDescription>
+                Registration takes approximately 5 days to complete. We'll notify you when it's done.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="mb-3">
+                <p className="text-sm text-blue-600">
+                  <span className="line-through">₦22,000</span> 
+                  <span className="font-medium ml-2">₦12,000</span>
+                  <span className="ml-2">(₦10,000 subsidy covered by EasyPay to help you get started)</span>
+                </p>
               </div>
+              <Button 
+                className="w-full bg-green-600 hover:bg-green-700"
+                onClick={handleRegisterBusiness}
+              >
+                Register my business now
+              </Button>
             </CardContent>
           </Card>
         </div>
-
-        <div className="mt-6">
+        
+        <div className="text-center">
           <Button 
             variant="outline" 
             onClick={handleDoLater}
-            className="w-full"
+            className="w-full text-blue-600 font-medium bg-white border-blue-300"
           >
             DO THIS LATER
           </Button>
         </div>
-
-        <p className="text-center text-sm text-muted-foreground mt-4">
+        
+        <p className="text-center text-sm text-blue-600 mt-4">
           Registering your business increases your transaction limits and builds trust with your customers
         </p>
       </div>

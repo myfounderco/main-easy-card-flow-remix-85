@@ -15,23 +15,32 @@ const KeypadPage = () => {
   const { amount, formatAmount, runningTotal } = usePayment();
   const { activeReader, hasBusinessRegistration } = useDevice();
   const navigate = useNavigate();
-  const [showReaderConnected, setShowReaderConnected] = useState(false);
   const [showRegistrationDialog, setShowRegistrationDialog] = useState(false);
-  
-  useEffect(() => {
-    if (activeReader) {
-      setShowReaderConnected(true);
-      const timer = setTimeout(() => {
-        setShowReaderConnected(false);
-      }, 3000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [activeReader]);
   
   const numericAmount = parseFloat(amount) || 0;
   const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
   const isValidAmount = totalAmount > 0;
+  
+  // Calculate fee based on the pricing structure
+  const calculateFee = (value: number) => {
+    let calculatedFee = 0;
+    
+    if (value < 500) {
+      calculatedFee = 5; // Flat fee of ₦5 for transactions below ₦500
+    } else if (value >= 500 && value < 1000) {
+      calculatedFee = value * 0.01; // 1% for transactions between ₦501-₦999
+    } else {
+      calculatedFee = value * 0.015; // 1.5% for transactions ₦1,000 and above
+      // Cap the fee at ₦2,500
+      if (calculatedFee > 2500) {
+        calculatedFee = 2500;
+      }
+    }
+    
+    return calculatedFee;
+  };
+  
+  const transactionFee = calculateFee(totalAmount);
   
   const handleCharge = () => {
     if (!isValidAmount) {
@@ -65,20 +74,9 @@ const KeypadPage = () => {
             <span>Connect card reader (POS) into phone charging point or via Bluetooth.</span>
           </div>
         ) : (
-          <div className="bg-green-50 text-green-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
+          <div className="bg-green-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
             <CreditCard className="h-4 w-4 mr-2" />
-            <span>Insert card into reader chip side up.</span>
-          </div>
-        )}
-        
-        {showReaderConnected && (
-          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/20">
-            <div className="bg-blue-50 rounded-lg shadow-lg p-4 flex items-center border border-blue-200">
-              <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                <CreditCard className="h-5 w-5 text-blue-700" />
-              </div>
-              <span className="text-blue-700 font-medium">Reader connected</span>
-            </div>
+            <span>Reader connected, Insert card with the chip side up.</span>
           </div>
         )}
         
@@ -107,6 +105,13 @@ const KeypadPage = () => {
               Total: ₦{formatAmount(totalAmount.toString())}
             </div>
           )}
+          
+          {/* Transaction fee display */}
+          {isValidAmount && (
+            <div className="mt-2 text-sm text-blue-500">
+              Transaction fee: ₦{transactionFee.toFixed(2)}
+            </div>
+          )}
         </div>
         
         <div className="w-full max-w-md mx-auto mb-6">
@@ -117,7 +122,7 @@ const KeypadPage = () => {
           <Button 
             onClick={handleCharge} 
             disabled={!isValidAmount}
-            className="w-full h-14 text-lg relative overflow-hidden group text-white bg-blue-500 hover:bg-blue-600"
+            className="w-full h-14 text-lg relative overflow-hidden group text-white bg-blue-500 hover:bg-blue-600 rounded-full"
           >
             <span className="absolute inset-0 flex items-center justify-center group-hover:translate-y-10 transition-transform duration-200">
               Charge ₦{formatAmount(totalAmount.toString())}
@@ -168,12 +173,12 @@ const KeypadPage = () => {
             <Button 
               variant="outline" 
               onClick={() => setShowRegistrationDialog(false)}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="bg-green-600 hover:bg-green-700 text-white rounded-full"
             >
               Back To Edit Amount
             </Button>
             <Button 
-              className="bg-blue-500 hover:bg-blue-600"
+              className="bg-blue-500 hover:bg-blue-600 rounded-full"
               onClick={() => {
                 setShowRegistrationDialog(false);
                 navigate("/business-registration-check");

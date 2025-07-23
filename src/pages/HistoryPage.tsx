@@ -1,8 +1,8 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Calendar, CreditCard, Search, FileCheck, AlertTriangle, UserCircle, Flag } from "lucide-react";
 import { usePayment } from "@/contexts/PaymentContext";
+import { useDevice } from "@/contexts/DeviceContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BottomNav } from "@/components/layout/BottomNav";
@@ -11,6 +11,7 @@ import { toast } from "sonner";
 
 const HistoryPage = () => {
   const { transactions } = usePayment();
+  const { bankAccounts } = useDevice();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   
@@ -34,6 +35,9 @@ const HistoryPage = () => {
   const todaySales = transactions
     .filter(t => t.status === "completed" && t.date.toLocaleDateString() === today)
     .reduce((total, t) => total + t.amount, 0);
+  
+  // Get the first bank account as deposit account
+  const depositAccount = bankAccounts.length > 0 ? bankAccounts[0] : null;
   
   const handleViewReceipt = (id: string) => {
     navigate(`/receipt/${id}`);
@@ -80,6 +84,25 @@ const HistoryPage = () => {
       </div>
       
       <div className="px-4">
+        {/* Display deposit account */}
+        {depositAccount && (
+          <div className="mb-4 p-3 bg-blue-50 rounded-md border border-blue-200">
+            <div className="flex items-center">
+              <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600">
+                  <path d="M3 21V11L12 5L21 11V21H3Z" stroke="currentColor" strokeWidth="2" />
+                  <path d="M6 21V15H10V21" stroke="currentColor" strokeWidth="2" />
+                  <path d="M14 21V15H18V21" stroke="currentColor" strokeWidth="2" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-blue-700">Deposit Account</p>
+                <p className="text-xs text-blue-600">{depositAccount.bankName} - {depositAccount.accountNumber}</p>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <div className="relative mb-6">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
@@ -140,7 +163,7 @@ const HistoryPage = () => {
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-7 px-2 text-xs"
+                            className="h-7 px-2 text-xs rounded-full"
                             onClick={(e) => handleReportTransaction(e, transaction.id)}
                           >
                             <Flag className="h-3 w-3 mr-1 text-amber-500" />

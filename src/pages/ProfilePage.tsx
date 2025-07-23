@@ -144,10 +144,10 @@ const ProfilePage = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="mt-4">
-            <Button variant="outline" onClick={() => setShowDeleteConfirmation(false)}>
+            <Button variant="outline" onClick={() => setShowDeleteConfirmation(false)} className="rounded-full">
               Cancel
             </Button>
-            <Button variant="destructive" onClick={handleDeleteAccount}>
+            <Button variant="destructive" onClick={handleDeleteAccount} className="rounded-full">
               Remove Account
             </Button>
           </DialogFooter>

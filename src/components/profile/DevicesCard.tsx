@@ -24,8 +24,8 @@ export const DevicesCard: React.FC = () => {
         <CardDescription>
           Manage your existing readers or request a new one
         </CardDescription>
-        <div className="text-sm text-muted-foreground pt-2">
-          Plug connect the reader into your phone charging point or via Bluetooth.
+        <div className="text-sm text-blue-500 pt-2">
+          Plug your reader into your phone charging port or connect via Bluetooth.
         </div>
       </CardHeader>
       <CardContent>
@@ -33,7 +33,7 @@ export const DevicesCard: React.FC = () => {
         
         <div className="flex flex-col space-y-3 mt-4">                  
           <Button
-            className="w-full bg-payment-blue hover:bg-payment-darkBlue"
+            className="w-full bg-payment-blue hover:bg-payment-darkBlue rounded-full"
             onClick={() => navigate("/request-reader")}
           >
             <Plus className="h-4 w-4 mr-2" />

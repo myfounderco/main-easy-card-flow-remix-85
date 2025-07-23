@@ -29,7 +29,7 @@ export const BankAccountsCard: React.FC<BankAccountsCardProps> = ({
         <CardDescription>
           Add your bank accounts for deposits
         </CardDescription>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-blue-500">
           Payments will reflect instantly or within 24hrs
         </p>
       </CardHeader>
@@ -37,7 +37,7 @@ export const BankAccountsCard: React.FC<BankAccountsCardProps> = ({
         <BankAccountList onRemove={onRemoveAccount} />
         
         <Button 
-          className="w-full mt-4"
+          className="w-full mt-4 rounded-full"
           onClick={onAddAccount}
         >
           Add New Bank Account

@@ -93,7 +93,7 @@ const ReceiptPage = () => {
           </div>
 
           <div className="text-center text-blue-500 text-sm mb-3">
-            Receipt has been sent to cardholder's linked phone number and email (scroll down to more)
+            Receipt has been sent to cardholder's linked phone number and email (scroll down for more details)
           </div>
           
           <div className="w-full mb-4">

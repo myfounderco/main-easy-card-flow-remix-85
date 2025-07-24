@@ -187,8 +187,8 @@ const RequestReaderPage = () => {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button type="submit" className="w-full bg-payment-blue hover:bg-payment-darkBlue">
-                  Continue
+                <Button type="submit" className="w-full bg-payment-blue hover:bg-payment-darkBlue rounded-md">
+                  Submit
                 </Button>
               </CardFooter>
             </form>
@@ -200,7 +200,7 @@ const RequestReaderPage = () => {
             <CardHeader>
               <CardTitle className="text-blue-500">Select Reader Type</CardTitle>
               <CardDescription>
-                Choose the type of free card reader that best suits your device
+                Choose the type of card reader (POS) that best suits your device's charging port
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -262,14 +262,14 @@ const RequestReaderPage = () => {
               
               <div className="pt-4">
                 <h3 className="font-medium mb-2">Delivery Information</h3>
-                <p className="text-sm text-muted-foreground">
-                  Your free card reader will be delivered within 3-5 business days.
+                <p className="text-sm text-blue-600 font-bold">
+                  Your free card reader will be delivered within 3–5 business days.
                 </p>
               </div>
             </CardContent>
             <CardFooter>
               <Button 
-                className="w-full bg-payment-blue hover:bg-payment-darkBlue"
+                className="w-full bg-payment-blue hover:bg-payment-darkBlue rounded-md"
                 onClick={handleRequestSubmit}
                 disabled={!readerType}
               >

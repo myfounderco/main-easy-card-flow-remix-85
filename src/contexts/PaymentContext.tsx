@@ -20,6 +20,7 @@ interface PaymentContextType {
   setAmount: (amount: string) => void;
   addDigit: (digit: string) => void;
   clearAmount: () => void;
+  deleteLastDigit: () => void;
   formatAmount: (value: string) => string;
   transactions: Transaction[];
   addTransaction: (transaction: Omit<Transaction, "id" | "date">) => Transaction;
@@ -80,6 +81,10 @@ export const PaymentProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const clearAmount = () => {
     setAmount("");
+  };
+
+  const deleteLastDigit = () => {
+    setAmount((prev) => prev.slice(0, -1));
   };
 
   const formatAmount = (value: string): string => {
@@ -157,6 +162,7 @@ export const PaymentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setAmount,
         addDigit,
         clearAmount,
+        deleteLastDigit,
         formatAmount,
         transactions,
         addTransaction,

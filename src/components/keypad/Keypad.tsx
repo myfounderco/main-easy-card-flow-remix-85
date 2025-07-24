@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { usePayment } from "@/contexts/PaymentContext";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -25,7 +25,9 @@ export function Keypad({
   submitDisabled = false,
   submitText = "Submit"
 }: KeypadProps) {
-  const { addDigit, clearAmount, addToRunningTotal, clearRunningTotal } = usePayment();
+  const { addDigit, clearAmount, addToRunningTotal, clearRunningTotal, amount, deleteLastDigit } = usePayment();
+  const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const [isLongPress, setIsLongPress] = useState(false);
   
   const handleKeyPress = (digit: string) => {
     if (onKeyPress) {
@@ -38,10 +40,32 @@ export function Keypad({
   const handleDelete = () => {
     if (onDelete) {
       onDelete();
-    } else {
+    } else if (isLongPress) {
       clearAmount();
       clearRunningTotal();
+    } else {
+      deleteLastDigit();
     }
+  };
+
+  const handleDeleteStart = () => {
+    setIsLongPress(false);
+    const timer = setTimeout(() => {
+      setIsLongPress(true);
+      handleDelete();
+    }, 500); // Long press threshold of 500ms
+    setLongPressTimer(timer);
+  };
+
+  const handleDeleteEnd = () => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(null);
+    }
+    if (!isLongPress) {
+      handleDelete();
+    }
+    setIsLongPress(false);
   };
   
   const handleAddition = () => {
@@ -117,7 +141,11 @@ export function Keypad({
       {/* Row 4 */}
       <button 
         className="py-10 rounded-full flex items-center justify-center text-red-500 text-2xl font-bold transition-all duration-200 active:scale-95 bg-red-50"
-        onClick={handleDelete}
+        onMouseDown={handleDeleteStart}
+        onMouseUp={handleDeleteEnd}
+        onMouseLeave={handleDeleteEnd}
+        onTouchStart={handleDeleteStart}
+        onTouchEnd={handleDeleteEnd}
       >
         <ArrowLeft className="h-5 w-5" />
       </button>
@@ -129,7 +157,7 @@ export function Keypad({
       </button>
       {showAddButton ? (
         <button 
-          className="py-10 rounded-full flex items-center justify-center text-blue-500 text-xl font-normal transition-all duration-200 active:scale-95"
+          className="py-10 rounded-full flex items-center justify-center text-blue-500 text-xl font-light transition-all duration-200 active:scale-95"
           onClick={handleAddition}
         >
           +

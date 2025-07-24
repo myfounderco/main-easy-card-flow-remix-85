@@ -88,7 +88,7 @@ const KeypadPage = () => {
         ) : (
           <div className="bg-green-50 text-green-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
             <CreditCard className="h-4 w-4 mr-2" />
-            <span>Reader now connected, please insert the card with the chip side up.</span>
+            <span>Reader now connected, please insert the debit card with the chip side facing you/up.</span>
           </div>
         )}
         
@@ -199,7 +199,7 @@ const KeypadPage = () => {
               Complete Registration
             </Button>
           </DialogFooter>
-        </div>
+        </DialogContent>
       </Dialog>
       
       <BottomNav />

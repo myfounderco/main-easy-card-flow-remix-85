@@ -89,7 +89,7 @@ const ReaderSetupPage = () => {
         <Button 
           onClick={handleContinue}
           disabled={!selectedOption}
-          className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
+          className="w-full h-12 text-base bg-blue-500 hover:bg-blue-600 text-white rounded-md"
         >
           Continue
         </Button>

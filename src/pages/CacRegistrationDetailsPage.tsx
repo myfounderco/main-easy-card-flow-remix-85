@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Building, Info, CheckCircle } from "lucide-react";
+import { ArrowLeft, Building, Info, CheckCircle, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -241,17 +241,30 @@ const CacRegistrationDetailsPage = () => {
             
             <div className="border rounded-lg p-4">
               <p className="font-medium text-gray-800 mb-1">Account Details:</p>
-              <p className="text-gray-700">Bank: First Bank</p>
-              <p className="text-gray-700">Account Number: 1234567890</p>
-              <p className="text-gray-700">Account Name: EasyPay Nigeria Ltd</p>
+              <p className="text-gray-700">Bank: <span className="font-bold text-blue-600">First Bank</span></p>
+              <div className="flex items-center">
+                <p className="text-gray-700">Account Number: <span className="font-bold text-blue-600">1234567890</span></p>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="ml-2 h-6 w-6"
+                  onClick={() => {
+                    navigator.clipboard.writeText("1234567890");
+                    toast.success("Account number copied to clipboard");
+                  }}
+                >
+                  <Copy className="h-3 w-3" />
+                </Button>
+              </div>
+              <p className="text-gray-700">Account Name: <span className="font-bold text-blue-600">EasyPay Nigeria Ltd</span></p>
             </div>
             
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-blue-600">
               Please make your payment to the above account. Once your payment is confirmed, your CAC registration process will begin.
             </p>
             
             <Button 
-              className="w-full bg-green-500 hover:bg-green-600 text-white"
+              className="w-full bg-green-500 hover:bg-green-600 text-white rounded-md"
               onClick={handlePaymentConfirmed}
             >
               I have made the payment

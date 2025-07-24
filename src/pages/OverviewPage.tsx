@@ -40,104 +40,81 @@ const OverviewPage = () => {
       <div className="flex-1 p-4 space-y-6">
         {currentScreen === 'pricing' ? (
           <div className="space-y-4">
-            <h2 className="text-xl font-medium text-blue-500">Reasons to choose us</h2>
+            <h2 className="text-xl font-medium text-blue-500">Reasons to choose EasyPay</h2>
             
-            <Card className="overflow-hidden">
-              <div className="bg-blue-500 text-white p-4">
-                <div className="flex items-center mb-2">
-                  <Percent className="h-5 w-5 mr-2" />
-                  <h3 className="text-lg font-medium">Simple Transparent Pricing</h3>
+            <div className="space-y-4">
+              <Card className="overflow-hidden">
+                <div className="bg-blue-500 text-white p-4">
+                  <div className="flex items-center mb-2">
+                    <Percent className="h-5 w-5 mr-2" />
+                    <h3 className="text-lg font-medium">Transaction Fee</h3>
+                  </div>
+                  <p className="text-sm opacity-90">Our commission on sales</p>
                 </div>
-                <p className="text-sm opacity-90">
-                  No hidden fees or charges, just a simple percentage.
-                </p>
-              </div>
-              <CardContent className="p-4">
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <div className="flex items-center">
-                      <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                        <Percent className="h-4 w-4 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="font-medium">Transaction Fee</p>
-                        <p className="text-sm text-muted-foreground">Our commission on sales</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-xl text-blue-500">1.5%</p>
-                      <p className="text-xs text-muted-foreground">per transaction</p>
-                    </div>
+                <CardContent className="p-4 text-center">
+                  <p className="font-bold text-3xl text-blue-500">1.5%</p>
+                  <p className="text-sm text-muted-foreground">per transaction</p>
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden">
+                <div className="bg-amber-500 text-white p-4">
+                  <div className="flex items-center mb-2">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" className="mr-2">
+                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                    <h3 className="text-lg font-medium">Fee Cap</h3>
                   </div>
-                  
-                  <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <div className="flex items-center">
-                      <div className="h-8 w-8 rounded-full bg-amber-100 flex items-center justify-center mr-3">
-                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" className="text-amber-600">
-                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-medium">Fee Cap</p>
-                        <p className="text-sm text-muted-foreground">Maximum transaction fee</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-xl text-blue-500">₦2,500</p>
-                      <p className="text-xs text-muted-foreground">maximum</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <div className="flex items-center">
-                      <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                        <Coins className="h-4 w-4 text-indigo-600" />
-                      </div>
-                      <div>
-                        <p className="font-medium">Small Transactions</p>
-                        <p className="text-sm text-muted-foreground">For transactions below ₦500</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-xl text-blue-500">₦5</p>
-                      <p className="text-xs text-muted-foreground">flat fee</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <div className="flex items-center">
-                      <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                        <span className="font-bold text-lg text-purple-600">0</span>
-                      </div>
-                      <div>
-                        <p className="font-medium">No Monthly Fees</p>
-                        <p className="text-sm text-muted-foreground">No setup costs</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-xl text-blue-500">Zero</p>
-                      <p className="text-xs text-muted-foreground">No other deductions</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center pb-2">
-                    <div className="flex items-center">
-                      <div className="h-8 w-8 rounded-full bg-pink-100 flex items-center justify-center mr-3">
-                        <Gift className="h-4 w-4 text-pink-500" />
-                      </div>
-                      <div>
-                        <p className="font-medium">Card Reader (POS)</p>
-                        <p className="text-sm text-muted-foreground">For new users</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-xl text-blue-500">FREE</p>
-                      <p className="text-xs text-muted-foreground">Your First Reader</p>
-                    </div>
-                  </div>
+                  <p className="text-sm opacity-90">Maximum transaction fee</p>
                 </div>
-              </CardContent>
-            </Card>
+                <CardContent className="p-4 text-center">
+                  <p className="font-bold text-3xl text-blue-500">₦2,500</p>
+                  <p className="text-sm text-muted-foreground">maximum</p>
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden">
+                <div className="bg-indigo-500 text-white p-4">
+                  <div className="flex items-center mb-2">
+                    <Coins className="h-5 w-5 mr-2" />
+                    <h3 className="text-lg font-medium">Small Transactions</h3>
+                  </div>
+                  <p className="text-sm opacity-90">For transactions below ₦500</p>
+                </div>
+                <CardContent className="p-4 text-center">
+                  <p className="font-bold text-3xl text-blue-500">₦5</p>
+                  <p className="text-sm text-muted-foreground">flat fee</p>
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden">
+                <div className="bg-purple-500 text-white p-4">
+                  <div className="flex items-center mb-2">
+                    <span className="font-bold text-lg mr-2">0</span>
+                    <h3 className="text-lg font-medium">No Monthly Fees</h3>
+                  </div>
+                  <p className="text-sm opacity-90">No setup costs</p>
+                </div>
+                <CardContent className="p-4 text-center">
+                  <p className="font-bold text-3xl text-blue-500">Zero</p>
+                  <p className="text-sm text-muted-foreground">No other deductions</p>
+                </CardContent>
+              </Card>
+
+              <Card className="overflow-hidden">
+                <div className="bg-pink-500 text-white p-4">
+                  <div className="flex items-center mb-2">
+                    <Gift className="h-5 w-5 mr-2" />
+                    <h3 className="text-lg font-medium">Card Reader (POS)</h3>
+                  </div>
+                  <p className="text-sm opacity-90">For new users</p>
+                </div>
+                <CardContent className="p-4 text-center">
+                  <p className="font-bold text-3xl text-blue-500">FREE</p>
+                  <p className="text-sm text-muted-foreground">Your First Reader</p>
+                </CardContent>
+              </Card>
+            </div>
             
             <div className="flex justify-end mt-6">
               <Button 

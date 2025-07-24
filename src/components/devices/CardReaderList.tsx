@@ -13,7 +13,7 @@ export function CardReaderList() {
   if (readers.length === 0) {
     return (
       <div className="text-center py-6">
-        <p className="text-muted-foreground">No card readers found.</p>
+        <p className="text-muted-foreground">No Card Readers found.</p>
         <Button
           className="mt-4 bg-payment-blue hover:bg-payment-darkBlue"
           onClick={() => navigate("/request-reader")}

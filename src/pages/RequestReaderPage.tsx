@@ -119,7 +119,7 @@ const RequestReaderPage = () => {
             <CardHeader>
               <CardTitle className="text-blue-500">Delivery Address</CardTitle>
               <CardDescription>
-                Enter the address where you'd like to receive your free card reader
+                Enter the address where you'd like to receive your free Card Reader
               </CardDescription>
             </CardHeader>
             <form onSubmit={handleAddressSubmit}>
@@ -200,7 +200,7 @@ const RequestReaderPage = () => {
             <CardHeader>
               <CardTitle className="text-blue-500">Select Reader Type</CardTitle>
               <CardDescription>
-                Choose the type of card reader (POS) that best suits your device's charging port
+                Choose the type of Card Reader (POS) that best suits your device's charging port
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -262,8 +262,8 @@ const RequestReaderPage = () => {
               
               <div className="pt-4">
                 <h3 className="font-medium mb-2">Delivery Information</h3>
-                <p className="text-sm text-blue-600 font-bold">
-                  Your free card reader will be delivered within 3–5 business days.
+                <p className="text-sm text-blue-400 font-bold">
+                  Your free Card Reader will be delivered within 3–5 business days.
                 </p>
               </div>
             </CardContent>

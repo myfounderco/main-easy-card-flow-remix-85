@@ -157,7 +157,7 @@ export function Keypad({
       </button>
       {showAddButton ? (
         <button 
-          className="py-10 rounded-full flex items-center justify-center text-blue-500 text-xl font-light transition-all duration-200 active:scale-95"
+          className="py-10 rounded-full flex items-center justify-center text-blue-500 text-xl font-bold transition-all duration-200 active:scale-95"
           onClick={handleAddition}
         >
           +

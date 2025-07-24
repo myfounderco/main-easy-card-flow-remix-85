@@ -74,7 +74,7 @@ const GetStartedPage: React.FC = () => {
             <div>
               <h3 className="text-xl font-medium mb-2 text-blue-500">Free Reader (POS)</h3>
               <p className="text-gray-500">
-                Get a free card reader to start accepting card payments right away with no setup or monthly fees
+                Get a free Card Reader to start accepting card payments right away with no setup or monthly fees
               </p>
             </div>
           </div>

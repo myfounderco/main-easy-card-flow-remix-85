@@ -44,10 +44,10 @@ const ReaderSetupPage = () => {
         </div>
         
         <h1 className="text-2xl font-bold text-center mb-2">EasyPay Card Reader</h1>
-        <p className="text-base text-gray-600 text-center mb-6">Let's get you set up with a card reader</p>
+        <p className="text-base text-gray-600 text-center mb-6">Let's get you set up with a Card Reader</p>
         
-        <p className="text-base text-blue-600 font-bold text-center mb-6">
-          Request a new Card Reader (POS) if you do not already have one. NOTE: Your first card reader is free and will be delivered to you at no cost
+        <p className="text-base text-blue-400 font-bold text-center mb-6">
+          Request a new Card Reader (POS) if you do not already have one. NOTE: Your first Card Reader is free and will be delivered to you at no cost
         </p>
 
         <Card 
@@ -60,7 +60,7 @@ const ReaderSetupPage = () => {
             </div>
             <div className="flex-1">
               <h3 className="font-bold text-lg">I already have a reader</h3>
-              <p className="text-gray-600 text-sm">Connect your existing card reader to your account</p>
+              <p className="text-gray-600 text-sm">Connect your existing Card Reader to your account</p>
             </div>
             {selectedOption === "existing" && (
               <CheckCircle2 className="h-6 w-6 text-blue-500" />
@@ -78,7 +78,7 @@ const ReaderSetupPage = () => {
             </div>
             <div className="flex-1">
               <h3 className="font-bold text-lg">Request a new reader</h3>
-              <p className="text-gray-600 text-sm">We'll ship a new card reader to your address for free</p>
+              <p className="text-gray-600 text-sm">We'll ship a new Card Reader to your address for free</p>
             </div>
             {selectedOption === "new" && (
               <CheckCircle2 className="h-6 w-6 text-blue-500" />

@@ -7,17 +7,21 @@ import { X, ChevronLeft, AlertTriangle, CreditCard } from "lucide-react";
 
 const ProcessPaymentPage = () => {
   const navigate = useNavigate();
-  const { amount, formatAmount, transactions, addTransaction } = usePayment();
+  const { amount, formatAmount, transactions, addTransaction, runningTotal } = usePayment();
   const [pin, setPin] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
   
+  // Calculate total amount
+  const numericAmount = parseFloat(amount) || 0;
+  const totalAmount = runningTotal > 0 ? runningTotal + numericAmount : numericAmount;
+  
   // Add some validation
   useEffect(() => {
-    if (parseFloat(amount) <= 0) {
+    if (totalAmount <= 0) {
       navigate("/");
     }
-  }, [amount, navigate]);
+  }, [totalAmount, navigate]);
   
   // Auto-process when PIN is complete
   useEffect(() => {
@@ -57,9 +61,8 @@ const ProcessPaymentPage = () => {
       // For demo purposes, let's say PIN 1234 is "correct"
       if (pin === "1234") {
         // Instead of setPaymentStatus, we'll create a transaction directly
-        const numAmount = parseFloat(amount) || 0;
         const transaction = addTransaction({
-          amount: numAmount,
+          amount: totalAmount,
           status: "completed",
           cardType: "Visa",
           cardLast4: "4321",
@@ -120,7 +123,7 @@ const ProcessPaymentPage = () => {
           
           <div>
             <p className="text-green-600 mb-2">You are about to pay</p>
-            <h2 className="text-5xl font-bold mb-2 text-green-600">{formatAmount(amount)}</h2>
+            <h2 className="text-5xl font-bold mb-2 text-green-600">₦{formatAmount(totalAmount.toString())}</h2>
             <p className="text-muted-foreground text-sm">
               Ask the customer to enter their 4-digit PIN
             </p>

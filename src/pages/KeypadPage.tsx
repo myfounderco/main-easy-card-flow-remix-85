@@ -76,7 +76,7 @@ const KeypadPage = () => {
           <div className="bg-blue-50 text-blue-700 p-3 rounded-md mb-6 flex items-center font-bold text-sm justify-center">
             <CreditCard className="h-4 w-4 mr-2" />
             <span>
-              Plug card reader (POS) into phone charging port or connect via Bluetooth.{" "}
+              Plug Card Reader (POS) into phone charging port or connect via Bluetooth.{" "}
               <button 
                 onClick={handleLinkReader}
                 className="underline hover:text-blue-800"

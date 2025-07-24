@@ -31,7 +31,7 @@ const PaymentMethodPage = () => {
     switch (method) {
       case "card-reader":
         if (!activeReader) {
-          toast.error("No card reader connected. Please connect a reader in the profile section.");
+          toast.error("No Card Reader connected. Please connect a reader in the profile section.");
           return;
         }
         navigate("/process-payment");
@@ -89,7 +89,7 @@ const PaymentMethodPage = () => {
             </div>
             <div className="ml-4 text-left flex-1">
               <h3 className="font-medium">Tap to Pay</h3>
-              <p className="text-sm text-muted-foreground">Use your phone as a card reader</p>
+              <p className="text-sm text-muted-foreground">Use your phone as a Card Reader</p>
             </div>
           </button>
           

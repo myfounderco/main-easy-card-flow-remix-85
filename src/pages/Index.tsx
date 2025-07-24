@@ -65,7 +65,7 @@ const Index = () => {
                 </div>
                 <div className="text-left">
                   <h3 className="font-medium text-lg mb-1">Card Reader Setup</h3>
-                  <p className="text-muted-foreground text-sm">Connect and manage your card readers</p>
+                  <p className="text-muted-foreground text-sm">Connect and manage your Card Readers</p>
                 </div>
               </Button>
             </CardContent>

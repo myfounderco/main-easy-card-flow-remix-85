@@ -25,7 +25,7 @@ export function ProcessingPayment({ onComplete }: ProcessingPaymentProps) {
     const timer = setTimeout(() => {
       if (!activeReader) {
         setStage("failed");
-        setErrorMessage("No card reader connected. Please connect a reader in the profile section.");
+        setErrorMessage("No Card Reader connected. Please connect a reader in the profile section.");
         return;
       }
       

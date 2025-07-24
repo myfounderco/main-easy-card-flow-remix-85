@@ -113,7 +113,7 @@ const SampleReceiptPage = () => {
                 <p className="text-xs text-gray-500">www.easypay.com | support@easypay.com</p>
                 <p className="text-xs text-gray-500">Customer Support: +234 800 1234 567</p>
                 <p className="text-xs mt-2 text-gray-600 italic">
-                  You too can start accepting card payments using our free mobile card reader POS.
+                  You too can start accepting card payments using our free mobile Card Reader POS.
                   Visit our website or download our app for more information.
                 </p>
               </div>

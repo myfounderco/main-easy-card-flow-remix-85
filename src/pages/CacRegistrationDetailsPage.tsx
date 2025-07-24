@@ -294,7 +294,7 @@ const CacRegistrationDetailsPage = () => {
             </div>
             
             <Button 
-              className="w-full bg-green-500 hover:bg-green-600 text-white"
+              className="w-full bg-green-500 hover:bg-green-600 text-white rounded-md"
               onClick={handleConfirmationDone}
             >
               Done
